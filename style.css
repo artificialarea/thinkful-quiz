@@ -4,4 +4,13 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  padding-top: 60px;
+}
+
+.intro-view h1 {
+  padding-top: 0;
 }

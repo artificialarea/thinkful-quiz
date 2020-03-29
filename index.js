@@ -1,21 +1,7 @@
 'use strict';
 
-'use strict';
-
-// In-memory database of questions
-const QUESTIONS = [
+// SEE store.js FOR DATABASE //
 
 
-
-
-];
-
-// Create your initial store
-const STORE = {
-  // Current question
-  // User's answer choice(s)
-  // Current view
-  // Score? Anything else?
-};
 
 

@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 20px;
+
+}
+
+div {
+  border: 2px solid black;
+  padding: 20px;
+  margin-top: 60px;
+  max-width: 545px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #F9F9F9;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.feedback-view h1 {
+  color: red;
+}
+
+button {
+  padding: 5px 10px;
+  margin-top: 40px;
+}
+
+input {
+  margin: 10px 8px 10px 0;
+}
+
+.score {
+  color: #999;
+  font-weight: 600;
+  margin-top: 60px;
+  margin-bottom: 0;
+  display: block;
+  background-color: #EAEAEA;
+  padding: 10px;
+
+}
+
+.feedback-view .score {
+  color: white;
+  background-color: red;
+}
+
+img {
+  border: 1px solid black;
+}
+
+h3 {
+  line-height: 1.5;
+}

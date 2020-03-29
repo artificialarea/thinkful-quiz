@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- per instructions: https://courses.thinkful.com/interactive-web-apps-v1/checkpoint/9 -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinematic Quiz</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- View 1: Introduction -->
+  <div class="intro-view">
+    <h1>Intro</h1>
+    <h2>Cinematic Quiz!</h2>
+    <p>Wanna test your knowledge of film? Of course you do. There will be a series of questions about particular scenes in films with multiple choice answers.</p>
+
+    <p>Images sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME</a></p>
+
+    <button type="submit">Start Quiz!</button>
+  </div>
+
+  <!-- View 2: Question Template -->
+  <div class="question-view">
+    <h1>Question</h1>
+    <img src="https://66.media.tumblr.com/f407ad0f00dee9ea1eaf24f26fe2a335/tumblr_nrsfo8Ubbw1qe0eclo1_r7_500.gifv">
+    <!-- <img src="_img/IWDRM_NoCountryForOldMen.webp" alt="man stares out into space, thinking"> -->
+    <h3>3/5: In the film “Old Country for Old Men”, what is the method Anton Chigurh (Javier Bardem) uses for deciding whether or not to kill someone?</h2>
+    <form>
+      <input type="radio" name="answer" id="answer-1" value="answer-1" checked><label for="answer-1">He flips a coin.</label><br>
+
+      <input type="radio" name="answer" id="answer-2" value="answer-2"><label for="answer-2">He looks deeply into their eyes.</label><br>
+
+      <input type="radio" name="answer" id="answer-3" value="answer-3"><label for="answer-3">He smells them.</label><br>
+
+      <input type="radio" name="answer" id="answer-4" value="answer-"><label for="answer-4">He has a drink of milk first.
+      </label><br>
+
+      <button type="submit">Submit</button>
+
+      <p class="score">YOUR SCORE: 2/3 correct</p>
+  </div>
+
+  <!-- View 3a: Feedback if Answer True -->
+  <div class="feedback-view true">
+    <h1>True!</h1>
+    <img src="https://66.media.tumblr.com/f407ad0f00dee9ea1eaf24f26fe2a335/tumblr_nrsfo8Ubbw1qe0eclo1_r7_500.gifv">
+    <h3>He flips a coin.</h3>
+
+    <button type="submit">Next Question</button>
+
+    <p class="score">YOUR SCORE: 3/4 correct</p>
+  </div>
+
+  <!-- View 3b: Feedback if Answer False -->
+  <div class="feedback-view false">
+    <h1>Wrong!</h1>
+    <img src="https://66.media.tumblr.com/f407ad0f00dee9ea1eaf24f26fe2a335/tumblr_nrsfo8Ubbw1qe0eclo1_r7_500.gifv">
+    <h3>He flips a coin.</h3>
+
+    <button type="submit">Next Question</button>
+
+    <p class="score">YOUR SCORE: 2/4 correct</p>
+  </div>
+
+  <!-- View 4: End of Quiz Result -->
+  <div class="results-view">
+    <h1>Congratulations...</h1>
+    <h2 class="final-score">Your Final Score is 4 out of 5 correct answers!</h2>
+    <p>Impressive. You certainly are a film buff.</p>
+
+    <button type="submit">Try Quiz Again?</button>
+  </div>
+
+
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<script src="store.js"></script>
+<script src="index.js"></script>
+
+</html>

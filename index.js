@@ -1,5 +1,7 @@
 'use strict';
 
+'use strict';
+
 // In-memory database of questions
 const QUESTIONS = [
 
@@ -15,3 +17,5 @@ const STORE = {
   // Current view
   // Score? Anything else?
 };
+
+

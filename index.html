@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 
 
-<!-- per instructions: https://courses.thinkful.com/interactive-web-apps-v1/checkpoint/9 -->
+  per instructions: 
+  https://courses.thinkful.com/interactive-web-apps-v1/checkpoint/9 
+
+  ******************************
+  all images sourced from
+  IF WE DON'T,
+  REMEMBER ME.
+  https://iwdrm.tumblr.com/
+  ******************************
+
+-->
 
 <head>
   <meta charset="UTF-8">
@@ -16,31 +27,52 @@
 </head>
 <body>
 
-  <!-- Question View Template -->
-  <div class="question-view">
-    <ul class="gauge">
+  <!-- START VIEW TEMPLATE -->
+  <div class="intro"></div>
+
+
+  <!-- QUIZ (QUESTION) VIEW TEMPLATE -->
+  <div class="quiz">
+
+    <img src="_img/IWDRM_NoCountryForOldMen.webp" alt="man stares out into space, thinking">
+
+    <!-- STATUS element persistent in both .quiz and .feedback views -->
+    <ul class="status">
       <li class="question-gauge">Question: 
         <span class="js-question-num">3/5</span></li>
       <li class="score-gauge">Score: 
         <span class="js-score">20</span></li>
     </ul>
-    <img src="_img/IWDRM_NoCountryForOldMen.webp" alt="man stares out into space, thinking"> 
+
     <h1 class="">No Country for Old Men</h1>
     <h3 class="question">What is the method Anton Chigurh (Javier Bardem) uses for deciding whether or not to kill someone?</h2>
-    <form class="choices">
+    <form class="user-controls">
       <input type="radio" name="answer" id="answer-1" value="answer-1" checked><label for="answer-1">He flips a coin.</label><br>
-
       <input type="radio" name="answer" id="answer-2" value="answer-2"><label for="answer-2">He looks deeply into their eyes.</label><br>
-
       <input type="radio" name="answer" id="answer-3" value="answer-3"><label for="answer-3">He smells them.</label><br>
-
-      <input type="radio" name="answer" id="answer-4" value="answer-"><label for="answer-4">He has a drink of milk first.
+      <input type="radio" name="answer" id="answer-4" value="answer-4"><label for="answer-4">He has a drink of milk first.
       </label><br>
-
-      <button type="submit">Submit</button>
+      <button type="submit-answer">Submit Answer</button>
 
   </div>
 
+
+  <!-- FEEDBACK VIEW TEMPLATE -->
+  <div class="feedback">
+
+    <!-- STATUS element persistent in both .quiz and .feedback views -->
+    <ul class="status">
+      <li class="question-gauge">Question: 
+        <span class="js-question-num">3/5</span></li>
+      <li class="score-gauge">Score: 
+        <span class="js-score">20</span></li>
+    </ul>
+
+  </div>
+
+
+  <!-- FINAL RESULTS VIEW TEMPLATE -->
+  <div class="final-results"></div>
 
 
 

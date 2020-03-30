@@ -2,12 +2,18 @@
   box-sizing: border-box;
 }
 
+/*
+html {
+  background: url(_img/IWDRM_NoCountryForOldMen.webp) no-repeat center center fixed;
+  background-size: cover;
+}
+*/
+
 body {
   font-family: 'Roboto', sans-serif;
+  color: #2b2b2b;
   margin: 20px;
   background-color: rgb(167, 164, 164);
-  color: #2b2b2b;
-
 }
 
 div {
@@ -19,31 +25,28 @@ div {
   background-color: #F9F9F9;
 }
 
-h1 {
-
-}
-
-.feedback-view h1 {
-  color: red;
+img {
+  width: 100%;
 }
 
 h3 {
   line-height: 1.5;
 }
 
-button {
-  padding: 5px 10px;
-  margin-top: 40px;
-}
-
 input {
   margin: 10px 8px 10px 0;
 }
 
-ul {
+button {
+  padding: 5px 10px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.status {
   padding: 8px 16px;
   margin: 0 0 16px 0;
-  background-color: rgb(236, 233, 233);
+  background-color: rgb(12, 12, 12);
   color: #999;
   font-weight: 800;
 }
@@ -52,29 +55,8 @@ li {
   display: inline-block;
 }
 
-.question-gauge {
+.question-gauge { }
 
-}
 .score-gauge {
   float: right;
-  /*
-  color: #999;
-  font-weight: 600;
-  margin-top: 60px;
-  margin-bottom: 0;
-  display: block;
-  background-color: #EAEAEA;
-  padding: 10px;
-  */
-
 }
-
-.feedback-view .score {
-  color: white;
-  background-color: red;
-}
-
-img {
-  width: 100%;
-}
-

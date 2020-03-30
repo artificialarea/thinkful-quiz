@@ -3,34 +3,67 @@
 // SEE store.js FOR DATABASE //
 
 
+// $(document).ready
+$(function() {
+  renderView();
+  handleQuestionView();
+  handleAnswerSubmitted();
+});
 
 
 
-// GUIDANCE //////////////////////////////////////////////
-// from https://thinkful.slides.com/thinkful/quiz-app#/9
+// GUIDANCE ////////////////////////////////////////////////
+// from https://thinkful.slides.com/thinkful/quiz-app#/8  //
+//                                                        //
+// VIEW AND RENDERING //////////////////////////////////////
 
-// 1 VIEWS AND RENDERING /////////////////////////////////
-
-function render() {
-  if (store.view === 'start') {
+function renderView() {
+  // Render function "draws" the app.
+  // Explicitly set components to visible or hidden 
+  // on every execution of render.
+  if (STORE.view === 'start') {
     $('.intro').show();
     $('.quiz').hide();
+    $('.feedback').hide();
+    $('.final-results').hide();
     $('.status').hide();
-  } else if (store.view === 'quiz') {
+  } else if (STORE.view === 'quiz') {
     $('.intro').hide();
     $('.quiz').show();
+    $('.feedback').hide();
+    $('.final-results').hide();
     $('.status').show();
+  } else if (STORE.view === 'feedback') {
+    $('.intro').hide();
+    $('.quiz').hide();
+    $('.feedback').show();
+    $('.final-results').hide();
+    $('.status').show();
+  } else if (STORE.view === 'final-results') {
+    $('.intro').hide();
+    $('.quiz').hide();
+    $('.feedback').hide();
+    $('.final-results').show();
+    $('.status').hide();
   }
+  console.log(`STORE.view: ${STORE.view}`);
 }
 
 
-// 2 EXAMPLE APP STRUCTURE ///////////////////////////////
+// GUIDANCE ////////////////////////////////////////////////
+// from https://thinkful.slides.com/thinkful/quiz-app#/9  //
+//                                                        //
+// EXAMPLE APP STRUCTURE ///////////////////////////////////
 
 // Template generators
-function generateAnswerList(answers) {}
+function generateAnswerList(answers) {
+
+}
 
 // Rendering functions
-function renderQuestionText() {}
+function renderQuestionText() {
+
+}
 
 // Event handlers
 function handleAnswerSubmitted() {
@@ -41,25 +74,12 @@ function handleAnswerSubmitted() {
   });
 }
 
+function handleQuestionView() {
+  // display the question view via data in the STORE
+
+}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// After DOM has loaded, initialize
-$(function() {
-    handleAnswerSubmitted();
-});

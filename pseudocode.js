@@ -1,4 +1,7 @@
+/* eslint-disable strict */
 /* eslint-disable indent */
+/* eslint-disable semi */
+
 
 ///////////////////////////////////////////////////////////////
 // USER STORIES ///////////////////////////////////////////////
@@ -8,19 +11,20 @@
 // As a user, I should...
 
     // See an image of the movie in question
-        // [[ COULD: Provide a link to specific image source at https://iwdrm.tumblr.com ?]]
+        'COULD: Provide a link to specific image source at https://iwdrm.tumblr.com ?'
 
     // See the title of the movie
 
     // Read the question
 
     // Select from multiple choices (via radio button)
+        'COULD: randomise the order of the questions?'
 
     // Submit my answer via a submit button, to proceed to a FEEDBACK VIEW...
 
     // Must always be able to gauge my progress (ubiquitous gauge):
         // What current question number am I on? (and how many questions are left?)
-        // ^^^^^^ [[ COULD: visual gauge of progress ]]
+          'COULD: visual gauge of progress?'
         // What's my current score? (I think I'll do points)
 
 
@@ -41,9 +45,9 @@
         // If last question, then proceed to FINAL RESULT VIEW...
 
 
-    // [[ COULD ]]:
-        // Have informal feedback text/banter change for each particular question? (and different variants depending if correct or incorrect)?
-        // Display a particular feedback image if correct and incorrect?
+    'COULD:'
+        '// Have informal feedback text/banter change for each particular question? (and different variants depending if correct or incorrect)?'
+        '// Display a particular feedback image if correct and incorrect?'
 
 
 // RESULT VIEW ////////////////////////////////////////////// 

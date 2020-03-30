@@ -5,11 +5,12 @@
 body {
   font-family: 'Roboto', sans-serif;
   margin: 20px;
+  background-color: rgb(167, 164, 164);
+  color: #2b2b2b;
 
 }
 
 div {
-  border: 2px solid black;
   padding: 20px;
   margin-top: 60px;
   max-width: 545px;
@@ -19,11 +20,15 @@ div {
 }
 
 h1 {
-  margin-top: 0;
+
 }
 
 .feedback-view h1 {
   color: red;
+}
+
+h3 {
+  line-height: 1.5;
 }
 
 button {
@@ -35,7 +40,24 @@ input {
   margin: 10px 8px 10px 0;
 }
 
-.score {
+ul {
+  padding: 8px 16px;
+  margin: 0 0 16px 0;
+  background-color: rgb(236, 233, 233);
+  color: #999;
+  font-weight: 800;
+}
+
+li {
+  display: inline-block;
+}
+
+.question-gauge {
+
+}
+.score-gauge {
+  float: right;
+  /*
   color: #999;
   font-weight: 600;
   margin-top: 60px;
@@ -43,6 +65,7 @@ input {
   display: block;
   background-color: #EAEAEA;
   padding: 10px;
+  */
 
 }
 
@@ -52,9 +75,6 @@ input {
 }
 
 img {
-  border: 1px solid black;
+  width: 100%;
 }
 
-h3 {
-  line-height: 1.5;
-}

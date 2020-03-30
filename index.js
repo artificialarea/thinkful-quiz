@@ -42,9 +42,24 @@ function handleAnswerSubmitted() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // After DOM has loaded, initialize
-$(function(){
+$(function() {
     handleAnswerSubmitted();
 });
-
-

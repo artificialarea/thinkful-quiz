@@ -94,7 +94,9 @@ const STORE = {
   // Current question
   currentQuestion: 0,
   // User's answer choice(s)
+  userAnswer: 0,
   // Current view
+  view: 'start', // ? e.g. 'start', 'quiz', 'feedback-right', 'feedback-wrong' 'final-results'
   // Score? Anything else?
   score: 0,
 };

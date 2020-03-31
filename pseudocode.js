@@ -57,6 +57,9 @@
 // START VIEW ////////////////////////////////////////////// 
 // As a user, I should...
 
+// see intro text
+// click on START button to got to first question in QUIZ VIEW
+
 
 
 

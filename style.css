@@ -16,7 +16,12 @@ body {
   background-color: rgb(167, 164, 164);
 }
 
-div {
+.hidden {
+  /* on initial load of HTML already set the class of most of the app views to 'hidden' */
+  display: none;
+}
+
+section {  /* should change to <section> but had hide/show issues? */
   padding: 20px;
   margin-top: 60px;
   max-width: 545px;
@@ -41,6 +46,10 @@ button {
   padding: 5px 10px;
   margin-top: 40px;
   width: 100%;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 .status {

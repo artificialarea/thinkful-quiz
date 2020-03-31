@@ -28,37 +28,56 @@
 <body>
 
   <!-- START VIEW TEMPLATE -->
-  <div class="intro"></div>
+  <section class="intro">
+    <h1>Intro</h1>
+    <h2>Cinematic Quiz!</h2>
+    <p>Wanna test your knowledge of film? Of course you do. There will be a series of questions about particular scenes in films with multiple choice answers.</p>
+
+    <p>Images sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME</a></p>
+
+    <button class="start-quiz">Start Quiz!</button>
+
+  </section>
 
 
   <!-- QUIZ (QUESTION) VIEW TEMPLATE -->
-  <div class="quiz">
+  <section class="quiz hidden">
 
-    <img src="_img/IWDRM_NoCountryForOldMen.webp" alt="man stares out into space, thinking">
+    <!-- (nearly) all HTML to be generated/rendered as jQuery object into the DOM -->
+    
 
     <!-- STATUS element persistent in both .quiz and .feedback views -->
     <ul class="status">
+      <!--
       <li class="question-gauge">Question: 
         <span class="js-question-num">3/5</span></li>
       <li class="score-gauge">Score: 
         <span class="js-score">20</span></li>
+      -->
     </ul>
 
-    <h1 class="">No Country for Old Men</h1>
-    <h3 class="question">What is the method Anton Chigurh (Javier Bardem) uses for deciding whether or not to kill someone?</h2>
-    <form class="user-controls">
-      <input type="radio" name="answer" id="answer-1" value="answer-1" checked><label for="answer-1">He flips a coin.</label><br>
-      <input type="radio" name="answer" id="answer-2" value="answer-2"><label for="answer-2">He looks deeply into their eyes.</label><br>
-      <input type="radio" name="answer" id="answer-3" value="answer-3"><label for="answer-3">He smells them.</label><br>
-      <input type="radio" name="answer" id="answer-4" value="answer-4"><label for="answer-4">He has a drink of milk first.
-      </label><br>
-      <button type="submit-answer">Submit Answer</button>
+    <div class="content">
+      <!--
+      <img src="_img/IWDRM_NoCountryForOldMen.webp" alt="man stares out into space, thinking">
 
-  </div>
+      <h1 class="">No Country for Old Men</h1>
+      <h3 class="question">What is the method Anton Chigurh (Javier Bardem) uses for deciding whether or not to kill someone?</h2>
+      <form class="user-controls">
+        <input type="radio" name="answer" id="answer-1" value="answer-1" checked><label for="answer-1">He flips a coin.</label><br>
+        <input type="radio" name="answer" id="answer-2" value="answer-2"><label for="answer-2">He looks deeply into their eyes.</label><br>
+        <input type="radio" name="answer" id="answer-3" value="answer-3"><label for="answer-3">He smells them.</label><br>
+        <input type="radio" name="answer" id="answer-4" value="answer-4"><label for="answer-4">He has a drink of milk first.
+        </label><br>
+        <button type="submit-answer">Submit Answer</button>
+      </form>
+      -->
+    </div>
+    
+  </section>
 
 
   <!-- FEEDBACK VIEW TEMPLATE -->
-  <div class="feedback">
+  <section class="feedback hidden">
 
     <!-- STATUS element persistent in both .quiz and .feedback views -->
     <ul class="status">
@@ -68,11 +87,11 @@
         <span class="js-score">20</span></li>
     </ul>
 
-  </div>
+  </section>
 
 
   <!-- FINAL RESULTS VIEW TEMPLATE -->
-  <div class="final-results"></div>
+  <section class="final-results hidden"></section>
 
 
 

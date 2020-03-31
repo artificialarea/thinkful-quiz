@@ -110,12 +110,30 @@ const QUESTIONS = [
 
 // Create your initial store
 const STORE = {
+  // Current view
+  view: 'start', // ? e.g. 'start', 'quiz', 'feedback', 'final-results'
   // Current question
   currentQuestion: 0,
   // User's answer choice(s)
   userAnswer: 0,
-  // Current view
-  view: 'start', // ? e.g. 'start', 'quiz', 'feedback', 'final-results'
   // Score? Anything else?
   score: 0,
 };
+
+// index-v2 was addressing this STORE.properties 
+// some with slightly different *named* properties (and typeof)
+/*
+const STORE = {
+  // Current view
+  view: 'intro', // e.g. 'intro', 'quiz', 'feedback', 'final-results'
+  // Current question number
+  currentQuestionNum: 0,
+  // Current question?
+  currentQuestionObj: {},
+  // User's answer choice(s)
+  userAnswers: [],
+  // Score
+  userScore: 0,
+  //  Anything else?
+};
+*/

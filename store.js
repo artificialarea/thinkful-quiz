@@ -13,8 +13,9 @@ const QUESTIONS = [
       'A support group for the bereaved.',
     ],
     answer: 'A support group for men with testicular cancer.',
-    image: '_img/IWDRM_fightClub.webp',
-    imageAlt: 'man hugging another man',
+    // image: '_img/IWDRM_fightClub.webp',
+    image: 'https://66.media.tumblr.com/38ad849338d5e1eeecfd1880b0497514/tumblr_mh6d6nDLrR1qe0eclo1_r6_500.gifv',
+    imageAlt: 'A scene from the film, Fight Club.',
   },
   // 2
   {
@@ -27,7 +28,9 @@ const QUESTIONS = [
       'He’s a teacher.',
     ],
     answer: 'He’s a surveillance expert.',
-    image: '_img/IWDRM_theConversation.gif',
+    // image: '_img/IWDRM_theConversation.gif',
+    image: 'https://66.media.tumblr.com/tumblr_m0gypc6X3x1qe0eclo1_r4_500.gifv',
+    imageAlt: 'A scene from the film, The Conversation.',
   },
   // 3
   {
@@ -40,7 +43,9 @@ const QUESTIONS = [
       'Pequod',
     ],
     answer: 'Belefonte',
-    image: '_img/IWDRM_theLifeAquatic.webp',
+    // image: '_img/IWDRM_theLifeAquatic.webp',
+    image: 'https://66.media.tumblr.com/tumblr_lsovzeh9bf1qe0eclo1_r5_500.gifv',
+    imageAlt: 'A scene from the film, The Life Aquatic with Steve Zissou.',
   },
   // 4
   {
@@ -53,7 +58,9 @@ const QUESTIONS = [
       '“This monolith looks friendly.”',
     ],
     answer: '“Oh my god, it’s full of stars…”',
-    image: '_img/IWDRM_2001.webp',
+    // image: '_img/IWDRM_2001.webp',
+    image: 'https://66.media.tumblr.com/tumblr_loa8s68rcy1qe0eclo1_r1_500.gifv',
+    imageAlt: 'A scene from the film, 2001: A Space Odyssey.',
   },
   // 5
   {
@@ -66,7 +73,9 @@ const QUESTIONS = [
       'The Ellsberg Paradox',
     ],
     answer: 'The Ludovico Technique',
-    image: '_img/IWDRM_clockworkOrange.webp',
+    // image: '_img/IWDRM_clockworkOrange.webp',
+    image: 'https://66.media.tumblr.com/tumblr_li5uszybM11qe0eclo1_r3_500.gifv',
+    imageAlt: 'A scene from the film, Clockwork Orange.',
   },
   // 6
   {
@@ -79,7 +88,9 @@ const QUESTIONS = [
       'He has a drink of milk first, to contemplate.',
     ],
     answer: 'He flips a coin.',
-    image: '_img/IWDRM_NoCountryForOldMen.webp',
+    // image: '_img/IWDRM_NoCountryForOldMen.webp',
+    image: 'https://66.media.tumblr.com/f407ad0f00dee9ea1eaf24f26fe2a335/tumblr_nrsfo8Ubbw1qe0eclo1_r7_500.gifv',
+    imageAlt: 'A scene from the film, No Country for Old Men.',
   },
   /* template
   {
@@ -93,6 +104,7 @@ const QUESTIONS = [
     ],
     answer: '',
     image: '',
+    imageAlt: '',
   }, */
 ];
 

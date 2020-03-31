@@ -5,38 +5,51 @@
 
 // $(document).ready
 $(function() {
-  render('quiz'); // render(showView) e.g. showView = 'intro', 'quiz', 'feedback', 'final-results'
+  renderView();
   handleStartQuiz();
-  handleNextQuestion();
-  handleAnswerSubmitted();
+  handleQuizCycleTEMP();
+  // handleFeedback();
+  // handleQuestionView();
+  // handleAnswerSubmitted();
 });
 
-
-
-
-// TYPES OF FUNCTIONS 
-// GROUPED, PER CURRENT VIEW/STATE (for now)
+// TYPES OF FUNCTIONS
 // Template Generators
 // Rendering Functions
 // Event Handlers
 
-//////////////////////////////////////////////////////////////
-// GO TO NEXT QUESTION (WITHIN QUIZ VIEW) ////////////////////
-// either from 3. FEEDBACK VIEW
-// else initially from 1. START VIEW
-//////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////
 // TEMPLATE GENERATORS ///////////////////////////////////////
+//////////////////////////////////////////////////////////////
 
-function generateQuestion() {
-  // goto STORE to find currentQuestion number
-  const questionNum = STORE.currentQuestionNum;
+function generateFeedback(bool) {
+  console.log('generateFeedback() running...');
+  if (bool === true) {
+    console.log(true);
+  } else {
+    console.log(false);
+  }
+
+}
+
+function generateStatus() {
+  // goto STORE to find
+  $('.status').html(
+    `
+    `
+  );
+}
+
+function generateQuizQuestions(questionsArr) {
+  // go to STORE to find
+  // what (next) current question number is
+  const questionNum = STORE.currentQuestion;
   console.log(`questionNum: ${questionNum}`);
-  // goto QUESTIONS to get data
-  const question = QUESTIONS[questionNum];
-  console.log(`question object: ${question}`);
-  // generate HTML from data with title, questions, img src, img alt, etc.
-  // return HTML (to renderQuestion)
+    
+  // find question object in QUESTIONS database
+  const question = questionsArr[questionNum];
+  console.log(question);
 
   // generate the content in HTML
   // NOTE: .status bar will need to be generated separately
@@ -48,202 +61,59 @@ function generateQuestion() {
     <h3 class="question">${question.question}</h2>
 
     <form class="user-controls">
-      <input type="radio" name="answer" id="answer-1" value="${question.choices[0]}" required>
-      <label for="answer-1">${question.choices[0]}</label><br>
-      <input type="radio" name="answer" id="answer-2" value="${question.choices[1]}" required>
-      <label for="answer-2">${question.choices[1]}</label><br>
-      <input type="radio" name="answer" id="answer-3" value="${question.choices[2]}" required>
-      <label for="answer-3">${question.choices[2]}</label><br>
-      <input type="radio" name="answer" id="answer-4" value="${question.choices[3]}" required>
-      <label for="answer-4">${question.choices[3]}</label><br>
-      <button type="button" class="submit-answer">Submit Answer</button>
+      <label for="answer-1"><input type="radio" name="answer" id="answer-1" value="${question.choices[0]}" required>${question.choices[0]}</label><br>
+      <label for="answer-2"><input type="radio" name="answer" id="answer-2" value="${question.choices[1]}" required>${question.choices[1]}</label><br>
+      <label for="answer-3"><input type="radio" name="answer" id="answer-3" value="${question.choices[2]}" required>${question.choices[2]}</label><br>
+      <label for="answer-4"><input type="radio" name="answer" id="answer-4" value="${question.choices[3]}" required>${question.choices[3]}</label><br>
+      <button class="submit-answer">Submit Answer</button>
     </form>
     `
   );
 
   // return value
-
 }
 
-function generateStatusbar() {
-  // goto STORE to get data
-  // display progress:
-  // STORE.currentQuestion / QUESTION.length
-  // and userScore
-
-}
-
+//////////////////////////////////////////////////////////////
 // RENDERING FUNCTIONS ///////////////////////////////////////
+//////////////////////////////////////////////////////////////
 
-function renderQuestionText() {
-  // generateQuestion() to get HTML
+function renderFeedback(bool) {
+  console.log('renderFeedback() running...');
 
-  // insert HTML into the DOM...
+  // ^^ generateFn()
+  generateFeedback(bool);
+  // if (bool === true) {
+  //   generateFeedbackCorrect();
+  // } else {
+  //   generateFeedbackIncorrect();
+  // }
 
-}
-
-function renderStatusbar() {
-  // gnerateStatusbar() to get HTML
-
-  // insert HTML into the DOM...
-
-}
-
-// EVENT HANDLERS ////////////////////////////////////////////
-
-// from FEEDBACK VIEW
-function handleNextQuestion() {
-  console.log('handleNextQuestion() running...');
-  $('.feedback').on('click', '.next-question', function(event) {
-    event.preventDefault();
-
-    // IF !lastQuestion
-    // render(): show Quiz view with Statusbar component,
-    // renderQuestionText()
-    // renderStatusbar()
-    // ELSE IF lastQuestion
-    // render(): show Final-Results
-    // renderResults()
-
-  });
-
-}
-
-// from INTRO VIEW  
-// A near duplicate of handleNextQuestion() EXCEPT it requires binding jQuery event listener to different <section> element class name.
-// ** REVISE ** perhaps combine into function above ^^^^^^, by binding event listener to a common class/element within both <section>s?
-function handleStartQuiz() {
-  console.log('handleStartQuiz() running...');
-  $('.intro').on('click', '.next-question', function(event) {
-    event.preventDefault();
-    // render(): show Quiz view with Statusbar component,
-    // renderQuestionText()
-    // renderStatusbar()
-  });
+  STORE.view = 'feedback';
+  renderView();
 }
 
 
-//////////////////////////////////////////////////////////////
-// 2. QUESTION/QUIZ VIEW /////////////////////////////////////
-//////////////////////////////////////////////////////////////
+function renderQuiz() {
+  console.log('renderQuiz() running...');
 
-// TEMPLATE GENERATORS ///////////////////////////////////////
-
-function generateFeedbackForAnswer(bool) {
-
+  // ^^ generateFn()
+  // const result = generateQuizQuestions(QUESTIONS);
+  // const status = generateStatus(STORE);
+  generateQuizQuestions(QUESTIONS);
+  generateStatus(STORE);
+  
+  // with everything generated and queue'd up
+  // render (insert) HTML in DOM
+  STORE.view = 'quiz';
+  renderView();
 }
 
-
-// RENDERING FUNCTIONS ///////////////////////////////////////
-
-function renderFeedbackText() {
-  // if true new answer in STORE.userAnswer[STORE.userAnswer.length - 1] === QUESTIONS[STORE.currentQuestion].answer
-  ///// generateFeedbackForTrueAnswer() to get HTML
-  // else
-  ///// generateFeedbackForFalse() to get HTML
-
-  if (STORE.userAnswer[STORE.userAnswer.length - 1] === QUESTIONS[STORE.currentQuestion].answer) {
-    console.log("correct");
-    STORE.score += 1;
-    const response = generateFeedbackForAnswer(true);
-  } else {
-    console.log("wrong");
-    const response = generateFeedbackForAnswer(false);
-  }
-
-  // insert HTML into the DOM...
-
-}
-
-
-// EVENT HANDLERS ////////////////////////////////////////////
-
-function addAnswerToStore(newAnswer) {
-  // add/push newAnswer to userAnswer array within STORE object
-  STORE.userAnswers.push(newAnswer); 
-  console.log(`addAnswerToStore. STORE.userAnswers: ${STORE.userAnswers}`);
-  console.log(`lastest userAnswer: ${STORE.userAnswers[userAnswers.length - 1]}`);
-}
-
-function handleAnswerSubmitted() {
-  console.log('handleAnswerSubmitted() running...');
-  $('.quiz').on('click', '.submit-answer', function(event) {
-    event.preventDefault();
-    // get value of submitted answer
-    let selected = $('input:checked');
-    let answer = selected.val();
-    // add answer to STORE
-    addAnswerToStore(answer);
-
-    
-
-    // render('feedback'); // show Feedback view with Statusbar component,
-    // renderFeedbackText();
-
-    // <TEMP> bypass feedback view ^^^^^^^^ 
-    // just display sequence of quiz questions (sans feedback)
-    render('quiz'); // show Quiz view with Statusbar component,
-    renderQuestionText();
-    // </TEMP>
-
-    renderStatusbar();
-    
-  });
-
-}
-
-
-//////////////////////////////////////////////////////////////
-// 2/3. STATUS/SCORE COMPONENT ///////////////////////////////
-//////////////////////////////////////////////////////////////
-
-// TEMPLATE GENERATORS ///////////////////////////////////////
-
-// RENDERING FUNCTIONS ///////////////////////////////////////
-
-// EVENT HANDLERS ////////////////////////////////////////////
-
-
-
-//////////////////////////////////////////////////////////////
-// 3. FEEDBACK VIEW //////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-
-// TEMPLATE GENERATORS ///////////////////////////////////////
-
-// RENDERING FUNCTIONS ///////////////////////////////////////
-
-// EVENT HANDLERS ////////////////////////////////////////////
-
-
-
-
-//////////////////////////////////////////////////////////////
-// 4. FINAL-RESULTS VIEW /////////////////////////////////////
-//////////////////////////////////////////////////////////////
-
-// TEMPLATE GENERATORS ///////////////////////////////////////
-
-// RENDERING FUNCTIONS ///////////////////////////////////////
-
-// EVENT HANDLERS ////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////
-// VIEW AGNOSTIC /////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-
-// TEMPLATE GENERATORS ///////////////////////////////////////
-
-// RENDERING FUNCTIONS ///////////////////////////////////////
-
-// Render function "draws" the app.
-// Explicitly set components to visible or hidden 
-// on *every* execution of render.
-function render(showView = 'intro') {
-  console.log('render() running...');
-  STORE.view = showView;
-  if (STORE.view === 'intro') {
+// init
+function renderView() {
+  // Render function "draws" the app.
+  // Explicitly set components to visible or hidden 
+  // on every execution of render.
+  if (STORE.view === 'start') {
     $('.intro').show();
     $('.quiz').hide();
     $('.feedback').hide();
@@ -268,36 +138,12 @@ function render(showView = 'intro') {
     $('.final-results').show();
     $('.status').hide();
   }
-  console.log(`render() STORE.view: ${STORE.view}`);
+  console.log(`STORE.view: ${STORE.view}`);
 }
-
-// EVENT HANDLERS ////////////////////////////////////////////
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////
-// TEMPLATE GENERATORS ///////////////////////////////////////
-//////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////
-// RENDERING FUNCTIONS ///////////////////////////////////////
-//////////////////////////////////////////////////////////////
-
 
 //////////////////////////////////////////////////////////////
 // EVENT HANDLERS ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-
-// 
-function handlePreloadImages() {
-  // preload/cache images (but don't display them) ??
-  // so that there is no lag in images appearing
-  // when moving from question to question
-}
 
 // (via Start View)
 // Handle Init Quiz Question View 
@@ -309,7 +155,6 @@ function handleStartQuiz() {
     renderQuiz();
   });
 }
-
 
 // (via Quiz Question View)
 // check if choice true or false
@@ -328,7 +173,6 @@ function handleFeedback() {
 
     if (answer === QUESTIONS[STORE.currentQuestion].answer) {
       console.log("correct");
-      STORE.score += 10;
       renderFeedback(true);
     } else {
       console.log("wrong");
@@ -343,11 +187,37 @@ function handleFeedback() {
   });
 }
 
+// TEMPORARY HANDLER
+// just so I can quickly cycle through questions, bypassing Feedback loop
+function handleQuizCycleTEMP() {
+  $('.quiz').on('click', '.submit-answer', function(event) {
+    if (STORE.currentQuestion < QUESTIONS.length - 1) {
+      STORE.currentQuestion += 1;
+    } else {
+      STORE.currentQuestion = 0;
+    }
+    renderQuiz();
+  });
+
+}
 
 
 // (via Feedback View)
 // if !Last Question, // Handle *Next* Quiz Question View 
 // else if Last Question... // Handle Final Results View
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -360,16 +230,16 @@ function handleFeedback() {
 // EXAMPLE APP STRUCTURE ///////////////////////////////////
 
 /*
-// Template generators ////////////////////////////////////
+// Template generators
 function generateAnswerList(answers) {
 }
 
-// Rendering functions /////////////////////////////////////
+// Rendering functions
 function renderQuestionText() {
   // render question view
 }
 
-// Event handlers //////////////////////////////////////////
+// Event handlers
 function handleAnswerSubmitted() {
   $('.user-controls').on('click', '.submit-answer', () => {
     // Retrieve answer identifier of user-checked radio button
@@ -378,4 +248,7 @@ function handleAnswerSubmitted() {
   });
 }
 
+function handleQuestionView() {
+  // display the question view via data in the STORE
+}
 */

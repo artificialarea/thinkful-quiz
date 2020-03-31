@@ -21,7 +21,7 @@ body {
   display: none;
 }
 
-section { 
+section {  /* should change to <section> but had hide/show issues? */
   padding: 20px;
   margin-top: 60px;
   max-width: 545px;
@@ -31,7 +31,7 @@ section {
 }
 
 img {
-  /* width: 100%; */
+  width: 100%;
 }
 
 h3 {

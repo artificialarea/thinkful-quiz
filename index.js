@@ -288,7 +288,7 @@ function handleAnswerSubmitted() {
     // push selected answer to STORE
     STORE.userAnswer.push(selectedAnswer);
     console.log(`STORE.userAnswer: ${STORE.userAnswer}`);
-    renderStatus();
+    
     // Refering to database 'STORE.userAnswer' 
     // rather than local DOM 'selectedAnswer' (as I would do)
     if (STORE.userAnswer[STORE.userAnswer.length-1] === QUESTIONS[STORE.currentQuestion].answer) {
@@ -297,6 +297,7 @@ function handleAnswerSubmitted() {
     } else {
       renderFeedback(false);
     }
+    renderStatus();
   });
 }
 

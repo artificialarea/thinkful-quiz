@@ -38,6 +38,12 @@ function generateFeedback(bool) {
   // find question object in QUESTIONS database
   const question = QUESTIONS[questionNum];
 
+  // conditional to adjust the button label language once user reaches the last Feedback View before going on to the Final Results View
+  let buttonLabel = 'Next Question';
+  if (STORE.currentQuestion === QUESTIONS.length - 1) {
+    buttonLabel = 'Some Final Thoughts...';
+  } 
+
   if (bool === true) {
     // probably not the place to do it, but gonna render something on .status bar element to call attention to change in score...
     // $('.status').css('background-color', 'red');
@@ -49,15 +55,16 @@ function generateFeedback(bool) {
       <h1>TRUE!</h1>
       <p>The correct answer is...</p>
       <h3>${question.answer}</h3>
-      <button class="next-question">Next Question</button>
+      <button class="next-question">${buttonLabel}</button>
     `;
-  } else {
+  } 
+  else {
     return `
       <img src="${question.image}" alt="${question.imgAlt}">
       <h1>WRONG!</h1>
       <p>The correct answer is...</p>
       <h3>${question.answer}</h3>
-      <button class="next-question">Next Question</button>
+      <button class="next-question">${buttonLabel}</button>
     `;
   }
 

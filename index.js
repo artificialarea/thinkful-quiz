@@ -1,21 +1,18 @@
 'use strict';
 
+///////////////////////////////
 // SEE store.js FOR DATABASE //
-
+///////////////////////////////
 
 // $(document).ready
 $(function() {
-  renderView(); // renderView(thisView = 'start')
-  handleStartQuiz();
-  
-  // handleQuizCycleTEMP();
-  // TEMP disabled to allow ^^^^^^ handleQuizCycleTEMP() to work
-  handleAnswerSubmitted(); 
-
+  renderView();             // renderView(thisView = 'start')
+  handleStartQuiz();        // aka handleQuestionView();
+  handleAnswerSubmitted();  // disable if using this fn VVVVVV
+  // handleQuizCycleTEMP(); // to cycle thru questions bypassing Feedback View
   handleNextQuestion();
+  handleReStartQuiz();
 
-  // handleQuestionView();
-  // handleAnswerSubmitted();
 });
 
 // TYPES OF FUNCTIONS
@@ -28,12 +25,44 @@ $(function() {
 // TEMPLATE GENERATORS ///////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+function generateResults() {
+  // get final score 
+  const finalScore = STORE.score;
+  const possibleAnswers = QUESTIONS.length;
+  // contextual final message variants depending on user's finalScore
+  let contextualMsg;
+  if (finalScore === 0) {
+    // 0 : utter shite
+    contextualMsg = 'I\'m sorry to say, but that is utter shite!';
+  } else if (finalScore >= 1 && finalScore <= 3) {
+    // 1 - 3: poor
+    contextualMsg = 'Meh. You need to start binge watching more movies, eh?';
+  } else if (finalScore >= 4 && finalScore <= 6) {
+    // 4 - 6: decent
+    contextualMsg = 'Not bad. You need to start binge watching more movies, eh?';
+  } else if (finalScore >= 7 && finalScore <= 9) {
+    // 7 - 9: impressive
+    contextualMsg = 'Impressive! You certainly are a film buff, aren\'t you!';
+  } else if (finalScore === 10) {
+    // 10: bonafide auteur
+    contextualMsg = 'Impressive! You certainly are a film buff, aren\'t you! We will need to come up with another quiz with much more obscure films, eh?';
+  }
+
+  return `
+    <p class="final-score">So, you got ${finalScore} out of ${possibleAnswers} answers correct...</p>
+    <h2 class="msg">${contextualMsg}</h2>
+    <p class="iwdrm">By the way, all the animated film stills were sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME.</a> There is more where that came from, I assure you.</p> 
+    
+    <button class="start-quiz">Try Quiz Again?</button>
+  `;
+}
+
 function generateFeedback(bool) {
-  console.log('generateFeedback() ran...');
+  // console.log('generateFeedback() ran...');
   // go to STORE to find
   // what (next) current question number is
   const questionNum = STORE.currentQuestion;
-  // console.log(`questionNum: ${questionNum}`);
+  // // console.log(`questionNum: ${questionNum}`);
     
   // find question object in QUESTIONS database
   const question = QUESTIONS[questionNum];
@@ -45,9 +74,7 @@ function generateFeedback(bool) {
   } 
 
   if (bool === true) {
-    // probably not the place to do it, but gonna render something on .status bar element to call attention to change in score...
-    // $('.status').css('background-color', 'red');
-    // $('.status').css('color', 'white');
+    // trigger some visual indication when correct in the statusbar
     renderStatusHighlight(true);
 
     return `
@@ -67,11 +94,10 @@ function generateFeedback(bool) {
       <button class="next-question">${buttonLabel}</button>
     `;
   }
-
 }
 
 function generateStatus() {
-  console.log('generateStatus() ran...');
+  // console.log('generateStatus() ran...');
   // goto STORE to find
   const score = STORE.score;
   const currentQuestion = STORE.currentQuestion + 1;
@@ -85,15 +111,15 @@ function generateStatus() {
 }
 
 function generateQuizQuestion(arr) {
-  console.log('generateQuizQuestion(arr) ran...');
+  // console.log('generateQuizQuestion(arr) ran...');
   // go to STORE to find
   // what (next) current question number is
   const questionNum = STORE.currentQuestion;
-  // console.log(`questionNum: ${questionNum}`);
+  // // console.log(`questionNum: ${questionNum}`);
     
   // find question object in QUESTIONS database
   const question = arr[questionNum];
-  // console.log(question);
+  // // console.log(question);
 
   // generate the content in HTML
   // NOTE: .status bar will need to be generated separately
@@ -113,10 +139,7 @@ function generateQuizQuestion(arr) {
         <button class="submit-answer">Submit Answer</button>
       </fieldset>
     </form>
-    `;
-  // );
-
-  // return value
+  `;
 }
 
 
@@ -125,24 +148,25 @@ function generateQuizQuestion(arr) {
 // RENDERING FUNCTIONS ///////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+function renderFinalResults() {
+  // ^^ generateFn()
+  const results = generateResults();
+  $('.final-results').html(results);
+  renderView('final-results');
+}
+
 function renderFeedback(bool) {
-  console.log('renderFeedback() ran...');
+  // console.log('renderFeedback() ran...');
 
   // ^^ generateFn()
   const feedback = generateFeedback(bool);
-  // if (bool === true) {
-  //   generateFeedbackCorrect();
-  // } else {
-  //   generateFeedbackIncorrect();
-  // }
 
   $('.feedback').find('.content').html(feedback);    
-  // STORE.view = 'feedback';
   renderView('feedback');
 }
 
 function renderStatus() {
-  console.log('renderStatus() ran...');
+  // console.log('renderStatus() ran...');
   let updatedStatus = generateStatus();
   $('.status').html(updatedStatus);
 }
@@ -158,7 +182,7 @@ function renderStatusHighlight(param) {
 }
 
 function renderQuiz() {
-  console.log('renderQuiz() ran...');
+  // console.log('renderQuiz() ran...');
 
   // ^^ generateFn()
   // const result = generateQuizQuestions(QUESTIONS);
@@ -179,9 +203,9 @@ function renderView(thisView = 'start') {
   // Render function "draws" the app.
   // Explicitly set components to visible or hidden 
   // on every execution of render.
-  console.log('renderView() ran...');
+  // console.log('renderView() ran...');
   STORE.view = thisView;
-  // console.log(`STORE.view: ${STORE.view}`);
+  // // console.log(`STORE.view: ${STORE.view}`);
   if (STORE.view === 'start') {
     $('.intro').show();
     $('.quiz').hide();
@@ -213,14 +237,26 @@ function renderView(thisView = 'start') {
 // EVENT HANDLERS ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+// (via Final Results View)
+// ** REFACTOR ** into handleStartQuiz()
+function handleReStartQuiz() {
+  $('.final-results'). on('click', '.start-quiz', function(event) {
+    // reset STORE
+    STORE.score = 0;
+    STORE.currentQuestion = 0;
+    STORE.userAnswer = [];
+    renderQuiz();
+    renderStatus();
+  });
+}
+
 // (via Start View)
-// Handle Init Quiz Question View 
 function handleStartQuiz() {
-  console.log('handleStartQuiz() ran...');
+  // console.log('handleStartQuiz() ran...');
   // once Start button clicked inititate handling of Quiz Questions
   // binds an event handler
   $('.intro').on('click', '.start-quiz', function(event) {
-    // console.log(event.target);
+    // // console.log(event.target);
     renderQuiz();
     renderStatus();
   });
@@ -228,57 +264,39 @@ function handleStartQuiz() {
 
 // ^^^^^^^^^^^^ could probably merge this function with handleStartQuiz() **REITERATE**
 // (via Feedback View)
-// Handle Next Quiz Question View
 function handleNextQuestion() {
   $('.feedback').on('click', '.next-question', function(event) {
     // if !Last Question, // Handle *Next* Quiz Question View 
-    // else if Last Question... // Handle Final Results View
     if (STORE.currentQuestion !== QUESTIONS.length - 1) {
       STORE.currentQuestion += 1;
       renderQuiz();
       renderStatus();
     } else {
-      // that was the last question, so how Final Results View
-      // renderFinalResults();
+      renderFinalResults();
     }
-
-    
   });
-
 }
 
-
-
-
-
 // (via Quiz Question View)
-// Handle Feedback View
 function handleAnswerSubmitted() {
-  console.log('handleAnswerSubmitted() ran...');
+  // console.log('handleAnswerSubmitted() ran...');
   $('.quiz').on('submit', '#user-controls', function(event) {
-    console.log('handleAnswerSubmitted() listener event ran...');
+    // console.log('handleAnswerSubmitted() listener event ran...');
     event.preventDefault();
     let selectedAnswer = $('input[name=answer]:checked').val();
-    console.log(`input[name=answer]:checked: ${selectedAnswer}`);
+    // console.log(`input[name=answer]:checked: ${selectedAnswer}`);
     // push selected answer to STORE
     STORE.userAnswer.push(selectedAnswer);
     console.log(`STORE.userAnswer: ${STORE.userAnswer}`);
-
-    
+    renderStatus();
     // Refering to database 'STORE.userAnswer' 
     // rather than local DOM 'selectedAnswer' (as I would do)
     if (STORE.userAnswer[STORE.userAnswer.length-1] === QUESTIONS[STORE.currentQuestion].answer) {
-      console.log("CORRECT ANSWER");
       STORE.score += 1;
       renderFeedback(true);
-      // renderStatus();
     } else {
-      console.log("WRONG ANSWER");
       renderFeedback(false);
-      // renderStatus;
     }
-    //renderQuiz();
-    renderStatus();
   });
 }
 
@@ -290,26 +308,26 @@ function handleAnswerSubmitted() {
 // bypassing Feedback loop
 /*
 function handleQuizCycleTEMP() {
-  // console.log('handleQuizCycleTemp() ran...');
+  // // console.log('handleQuizCycleTemp() ran...');
   $('.quiz').on('submit', '#user-controls', function(event) {
-    console.log('handleQuizCycleTemp() listener event ran...');
+    // console.log('handleQuizCycleTemp() listener event ran...');
     event.preventDefault();
     let selectedAnswer = $('input[name=answer]:checked').val();
-    console.log(`input[name=answer]:checked: ${selectedAnswer}`);
+    // console.log(`input[name=answer]:checked: ${selectedAnswer}`);
     // push selected answer to STORE
     STORE.userAnswer.push(selectedAnswer);
-    console.log(`STORE.userAnswer: ${STORE.userAnswer}`);
+    // console.log(`STORE.userAnswer: ${STORE.userAnswer}`);
 
     
     // Refering to database 'STORE.userAnswer' 
     // rather than local DOM 'selectedAnswer' (as I would do)
     if (STORE.userAnswer[STORE.userAnswer.length-1] === QUESTIONS[STORE.currentQuestion].answer) {
-      console.log("CORRECT ANSWER");
+      // console.log("CORRECT ANSWER");
       STORE.score += 1;
       renderFeedback(true);
       renderStatus();
     } else {
-      console.log("WRONG ANSWER");
+      // console.log("WRONG ANSWER");
       renderFeedback(false);
       renderStatus;
     }

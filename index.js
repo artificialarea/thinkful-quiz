@@ -5,10 +5,13 @@
 
 // $(document).ready
 $(function() {
-  renderView();
+  renderView(); // renderView(thisView = 'start')
   handleStartQuiz();
   handleQuizCycleTEMP();
-  // handleFeedback();
+
+  // TEMP disabled to allow ^^^^^^ handleQuizCycleTEMP() to work
+  // handleFeedback(); 
+
   // handleQuestionView();
   // handleAnswerSubmitted();
 });
@@ -34,6 +37,7 @@ function generateFeedback(bool) {
 }
 
 function generateStatus() {
+  console.log('generateStatus() ran... on empty.');
   // goto STORE to find
   $('.status').html(
     `
@@ -41,36 +45,43 @@ function generateStatus() {
   );
 }
 
-function generateQuizQuestions(questionsArr) {
+function generateQuizQuestion(arr) {
+  console.log('generateQuizQuestion(arr) ran...');
   // go to STORE to find
   // what (next) current question number is
   const questionNum = STORE.currentQuestion;
-  console.log(`questionNum: ${questionNum}`);
+  // console.log(`questionNum: ${questionNum}`);
     
   // find question object in QUESTIONS database
-  const question = questionsArr[questionNum];
-  console.log(question);
+  const question = arr[questionNum];
+  // console.log(question);
 
   // generate the content in HTML
   // NOTE: .status bar will need to be generated separately
-  $('.quiz').find('.content').html(
-    `
+  // $('.quiz').find('.content').html(
+  return `
     <img src="${question.image}" alt="${question.imgAlt}">
 
     <h1 class="">${question.title}</h1>
-    <h3 class="question">${question.question}</h2>
 
     <form class="user-controls">
-      <label for="answer-1"><input type="radio" name="answer" id="answer-1" value="${question.choices[0]}" required>${question.choices[0]}</label><br>
-      <label for="answer-2"><input type="radio" name="answer" id="answer-2" value="${question.choices[1]}" required>${question.choices[1]}</label><br>
-      <label for="answer-3"><input type="radio" name="answer" id="answer-3" value="${question.choices[2]}" required>${question.choices[2]}</label><br>
-      <label for="answer-4"><input type="radio" name="answer" id="answer-4" value="${question.choices[3]}" required>${question.choices[3]}</label><br>
-      <button class="submit-answer">Submit Answer</button>
+      <fieldset>
+        <legend class="question-text">${question.question}</legend>
+        <label for="answer-1"><input type="radio" name="answer" id="answer-1" value="${question.choices[0]}" required>${question.choices[0]}</label><br>
+        <label for="answer-2"><input type="radio" name="answer" id="answer-2" value="${question.choices[1]}" required>${question.choices[1]}</label><br>
+        <label for="answer-3"><input type="radio" name="answer" id="answer-3" value="${question.choices[2]}" required>${question.choices[2]}</label><br>
+        <label for="answer-4"><input type="radio" name="answer" id="answer-4" value="${question.choices[3]}" required>${question.choices[3]}</label><br>
+        <button class="submit-answer">Submit Answer</button>
+      </fieldset>
     </form>
-    `
-  );
+    `;
+  // );
 
   // return value
+}
+
+function generateStatus() {
+
 }
 
 //////////////////////////////////////////////////////////////
@@ -78,7 +89,7 @@ function generateQuizQuestions(questionsArr) {
 //////////////////////////////////////////////////////////////
 
 function renderFeedback(bool) {
-  console.log('renderFeedback() running...');
+  console.log('renderFeedback() ran...');
 
   // ^^ generateFn()
   generateFeedback(bool);
@@ -88,31 +99,38 @@ function renderFeedback(bool) {
   //   generateFeedbackIncorrect();
   // }
 
-  STORE.view = 'feedback';
-  renderView();
+  // STORE.view = 'feedback';
+  renderView('feedback');
 }
 
+function renderStatus() {
+  console.log('renderStatus() ran...');
+}
 
 function renderQuiz() {
-  console.log('renderQuiz() running...');
+  console.log('renderQuiz() ran...');
 
   // ^^ generateFn()
   // const result = generateQuizQuestions(QUESTIONS);
   // const status = generateStatus(STORE);
-  generateQuizQuestions(QUESTIONS);
+  const card = generateQuizQuestion(QUESTIONS);
   generateStatus(STORE);
   
   // with everything generated and queue'd up
   // render (insert) HTML in DOM
-  STORE.view = 'quiz';
-  renderView();
+  $('.quiz').find('.content').html(card);
+  //STORE.view = 'quiz';
+  renderView('quiz');
 }
 
 // init
-function renderView() {
+function renderView(thisView = 'start') {
   // Render function "draws" the app.
   // Explicitly set components to visible or hidden 
   // on every execution of render.
+  console.log('renderView() ran...');
+  STORE.view = thisView;
+  // console.log(`STORE.view: ${STORE.view}`);
   if (STORE.view === 'start') {
     $('.intro').show();
     $('.quiz').hide();
@@ -138,7 +156,6 @@ function renderView() {
     $('.final-results').show();
     $('.status').hide();
   }
-  console.log(`STORE.view: ${STORE.view}`);
 }
 
 //////////////////////////////////////////////////////////////
@@ -148,6 +165,7 @@ function renderView() {
 // (via Start View)
 // Handle Init Quiz Question View 
 function handleStartQuiz() {
+  console.log('handleStartQuiz() ran...');
   // once Start button clicked inititate handling of Quiz Questions
   // binds an event handler
   $('.intro').on('click', '.start-quiz', function(event) {
@@ -156,6 +174,7 @@ function handleStartQuiz() {
   });
 }
 
+
 // (via Quiz Question View)
 // check if choice true or false
 function checkAnswer() {
@@ -163,9 +182,11 @@ function checkAnswer() {
 
 }
 
+
 // (via Quiz Question View)
 // Handle Feedback View
 function handleFeedback() {
+  console.log('handleFeedback() ran...');
   $('.quiz').on('click', '.submit-answer', function(event) {
     event.preventDefault();
     let selected = $('input:checked');
@@ -178,10 +199,6 @@ function handleFeedback() {
       console.log("wrong");
       renderFeedback(false);
     }
-    
-    console.log(selected);
-    console.log(answer);
-
     // checkAnswer();
     // renderFeedback();
   });
@@ -190,13 +207,33 @@ function handleFeedback() {
 // TEMPORARY HANDLER
 // just so I can quickly cycle through questions, bypassing Feedback loop
 function handleQuizCycleTEMP() {
+  console.log('handleQuizCycleTemp() ran...');
   $('.quiz').on('click', '.submit-answer', function(event) {
+    console.log('handleQuizCycleTemp() listener event ran...');
+    event.preventDefault();
+    let selected = $('input:checked');
+    let answer = selected.val();
+    console.log(`input:checked: ${selected}`);
+    console.log(`answer: ${answer}`);
+
+    if (answer === QUESTIONS[STORE.currentQuestion].answer) {
+      console.log("correct");
+      renderFeedback(true);
+    } else {
+      console.log("wrong");
+      renderFeedback(false);
+    }
+  
+    // question counter
     if (STORE.currentQuestion < QUESTIONS.length - 1) {
       STORE.currentQuestion += 1;
     } else {
       STORE.currentQuestion = 0;
     }
+
     renderQuiz();
+    renderStatus();
+
   });
 
 }

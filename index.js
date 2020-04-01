@@ -6,16 +6,15 @@
 
 // $(document).ready
 $(function() {
-  renderView();             // renderView(thisView = 'start')
-  handleStartQuiz();        // aka handleQuestionView();
-  handleAnswerSubmitted();  // disable if using this fn VVVVVV
-  // handleQuizCycleTEMP(); // to cycle thru questions bypassing Feedback View
+  renderView();               // renderView(thisView = 'start')
+  handleStartQuiz();        
+  handleAnswerSubmitted();    // disable if using this fn VVVVVV
+  // handleQuizCycleTEMP();   // to bypass Feedback View
   handleNextQuestion();
   handleReStartQuiz();
-
 });
 
-// TYPES OF FUNCTIONS
+// SEPERATION OF CONCERNS: TYPES OF FUNCTIONS
 // Template Generators
 // Rendering Functions
 // Event Handlers
@@ -26,10 +25,10 @@ $(function() {
 //////////////////////////////////////////////////////////////
 
 function generateResults() {
-  // get final score 
   const finalScore = STORE.score;
   const possibleAnswers = QUESTIONS.length;
-  // contextual final message variants depending on user's finalScore
+
+  // contextual message depending on userScore
   let contextualMsg;
   if (finalScore === 0) {
     // 0 : utter shite
@@ -52,29 +51,22 @@ function generateResults() {
     <p class="final-score">So, you got ${finalScore} out of ${possibleAnswers} answers correct...</p>
     <h2 class="msg">${contextualMsg}</h2>
     <p class="iwdrm">By the way, all the animated film stills are a labour of love sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME.</a></p> 
-    
     <button class="start-quiz">Try Quiz Again?</button>
   `;
 }
 
 function generateFeedback(bool) {
-  // console.log('generateFeedback() ran...');
-  // go to STORE to find
-  // what (next) current question number is
   const questionNum = STORE.currentQuestion;
-  // // console.log(`questionNum: ${questionNum}`);
-    
-  // find question object in QUESTIONS database
   const question = QUESTIONS[questionNum];
 
-  // conditional to adjust the button label language once user reaches the last Feedback View before going on to the Final Results View
+  // adjust the button label language once user reaches the last Feedback View before going on to the Final Results View
   let buttonLabel = 'Next Question';
   if (STORE.currentQuestion === QUESTIONS.length - 1) {
     buttonLabel = 'Some Final Thoughts...';
   } 
 
   if (bool === true) {
-    // trigger some visual indication when correct in the statusbar
+    // trigger some visual indication in the statusbar when correct
     renderStatusHighlight(true);
 
     return `
@@ -97,11 +89,10 @@ function generateFeedback(bool) {
 }
 
 function generateStatus() {
-  // console.log('generateStatus() ran...');
-  // goto STORE to find
   const score = STORE.score;
   const currentQuestion = STORE.currentQuestion + 1;
   const totalQuestions = QUESTIONS.length;
+
   return `
     <li class="question-gauge">Question: 
       <span class="js-question-num">${currentQuestion}/${totalQuestions}</span></li>
@@ -111,24 +102,12 @@ function generateStatus() {
 }
 
 function generateQuizQuestion(arr) {
-  // console.log('generateQuizQuestion(arr) ran...');
-  // go to STORE to find
-  // what (next) current question number is
   const questionNum = STORE.currentQuestion;
-  // // console.log(`questionNum: ${questionNum}`);
-    
-  // find question object in QUESTIONS database
   const question = arr[questionNum];
-  // // console.log(question);
 
-  // generate the content in HTML
-  // NOTE: .status bar will need to be generated separately
-  // $('.quiz').find('.content').html(
   return `
     <img src="${question.image}" alt="${question.imgAlt}">
-
     <h1 class="">${question.title}</h1>
-
     <form id="user-controls">
       <fieldset>
         <legend class="question-text">${question.question}</legend>
@@ -149,24 +128,18 @@ function generateQuizQuestion(arr) {
 //////////////////////////////////////////////////////////////
 
 function renderFinalResults() {
-  // ^^ generateFn()
   const results = generateResults();
   $('.final-results').html(results);
   renderView('final-results');
 }
 
 function renderFeedback(bool) {
-  // console.log('renderFeedback() ran...');
-
-  // ^^ generateFn()
   const feedback = generateFeedback(bool);
-
   $('.feedback').find('.content').html(feedback);    
   renderView('feedback');
 }
 
 function renderStatus() {
-  // console.log('renderStatus() ran...');
   let updatedStatus = generateStatus();
   $('.status').html(updatedStatus);
 }
@@ -182,30 +155,23 @@ function renderStatusHighlight(param) {
 }
 
 function renderQuiz() {
-  // console.log('renderQuiz() ran...');
-
-  // ^^ generateFn()
-  // const result = generateQuizQuestions(QUESTIONS);
-  // const status = generateStatus(STORE);
   const card = generateQuizQuestion(QUESTIONS);
   generateStatus(STORE);
   
-  // with everything generated and queue'd up
-  // render (insert) HTML in DOM
   $('.quiz').find('.content').html(card);
-  //STORE.view = 'quiz';
+
   renderView('quiz');
   renderStatusHighlight(false);
 }
 
-// init
+
 function renderView(thisView = 'start') {
   // Render function "draws" the app.
   // Explicitly set components to visible or hidden 
   // on every execution of render.
-  // console.log('renderView() ran...');
+
   STORE.view = thisView;
-  // // console.log(`STORE.view: ${STORE.view}`);
+
   if (STORE.view === 'start') {
     $('.intro').show();
     $('.quiz').hide();
@@ -232,6 +198,8 @@ function renderView(thisView = 'start') {
     $('.status').hide();
   }
 }
+
+
 
 //////////////////////////////////////////////////////////////
 // EVENT HANDLERS ////////////////////////////////////////////
@@ -305,8 +273,9 @@ function handleAnswerSubmitted() {
 
 
 // TEMPORARY HANDLER
-// just so I can quickly cycle through questions
+// so I can quickly cycle through questions
 // bypassing Feedback loop
+
 /*
 function handleQuizCycleTEMP() {
   // // console.log('handleQuizCycleTemp() ran...');
@@ -346,55 +315,5 @@ function handleQuizCycleTEMP() {
 
   });
 
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// GUIDANCE ////////////////////////////////////////////////
-// from https://thinkful.slides.com/thinkful/quiz-app#/9  //
-//                                                        //
-// EXAMPLE APP STRUCTURE ///////////////////////////////////
-
-/*
-// Template generators
-function generateAnswerList(answers) {
-}
-
-// Rendering functions
-function renderQuestionText() {
-  // render question view
-}
-
-// Event handlers
-function handleAnswerSubmitted() {
-  $('.user-controls').on('click', '.submit-answer', () => {
-    // Retrieve answer identifier of user-checked radio button
-    // Perform check: User answer === Correct answer?
-    // Update STORE and render appropriate section
-  });
-}
-
-function handleQuestionView() {
-  // display the question view via data in the STORE
 }
 */

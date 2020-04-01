@@ -51,7 +51,7 @@ function generateResults() {
   return `
     <p class="final-score">So, you got ${finalScore} out of ${possibleAnswers} answers correct...</p>
     <h2 class="msg">${contextualMsg}</h2>
-    <p class="iwdrm">By the way, all the animated film stills were sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME.</a> There is more where that came from, I assure you.</p> 
+    <p class="iwdrm">By the way, all the animated film stills are a labour of love sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME.</a></p> 
     
     <button class="start-quiz">Try Quiz Again?</button>
   `;

@@ -7,10 +7,12 @@
 $(function() {
   renderView(); // renderView(thisView = 'start')
   handleStartQuiz();
-  handleQuizCycleTEMP();
-
+  
+  // handleQuizCycleTEMP();
   // TEMP disabled to allow ^^^^^^ handleQuizCycleTEMP() to work
-  // handleFeedback(); 
+  handleAnswerSubmitted(); 
+
+  handleNextQuestion();
 
   // handleQuestionView();
   // handleAnswerSubmitted();
@@ -27,22 +29,52 @@ $(function() {
 //////////////////////////////////////////////////////////////
 
 function generateFeedback(bool) {
-  console.log('generateFeedback() running...');
+  console.log('generateFeedback() ran...');
+  // go to STORE to find
+  // what (next) current question number is
+  const questionNum = STORE.currentQuestion;
+  // console.log(`questionNum: ${questionNum}`);
+    
+  // find question object in QUESTIONS database
+  const question = QUESTIONS[questionNum];
+
   if (bool === true) {
-    console.log(true);
+    // probably not the place to do it, but gonna render something on .status bar element to call attention to change in score...
+    // $('.status').css('background-color', 'red');
+    // $('.status').css('color', 'white');
+    renderStatusHighlight(true);
+
+    return `
+      <img src="${question.image}" alt="${question.imgAlt}">
+      <h1>TRUE!</h1>
+      <p>The correct answer is...</p>
+      <h3>${question.answer}</h3>
+      <button class="next-question">Next Question</button>
+    `;
   } else {
-    console.log(false);
+    return `
+      <img src="${question.image}" alt="${question.imgAlt}">
+      <h1>WRONG!</h1>
+      <p>The correct answer is...</p>
+      <h3>${question.answer}</h3>
+      <button class="next-question">Next Question</button>
+    `;
   }
 
 }
 
 function generateStatus() {
-  console.log('generateStatus() ran... on empty.');
+  console.log('generateStatus() ran...');
   // goto STORE to find
-  $('.status').html(
-    `
-    `
-  );
+  const score = STORE.score;
+  const currentQuestion = STORE.currentQuestion + 1;
+  const totalQuestions = QUESTIONS.length;
+  return `
+    <li class="question-gauge">Question: 
+      <span class="js-question-num">${currentQuestion}/${totalQuestions}</span></li>
+    <li class="score-gauge">Score: 
+      <span class="js-score">${score}</span></li>
+  `;
 }
 
 function generateQuizQuestion(arr) {
@@ -64,7 +96,7 @@ function generateQuizQuestion(arr) {
 
     <h1 class="">${question.title}</h1>
 
-    <form class="user-controls">
+    <form id="user-controls">
       <fieldset>
         <legend class="question-text">${question.question}</legend>
         <label for="answer-1"><input type="radio" name="answer" id="answer-1" value="${question.choices[0]}" required>${question.choices[0]}</label><br>
@@ -80,9 +112,7 @@ function generateQuizQuestion(arr) {
   // return value
 }
 
-function generateStatus() {
 
-}
 
 //////////////////////////////////////////////////////////////
 // RENDERING FUNCTIONS ///////////////////////////////////////
@@ -92,19 +122,32 @@ function renderFeedback(bool) {
   console.log('renderFeedback() ran...');
 
   // ^^ generateFn()
-  generateFeedback(bool);
+  const feedback = generateFeedback(bool);
   // if (bool === true) {
   //   generateFeedbackCorrect();
   // } else {
   //   generateFeedbackIncorrect();
   // }
 
+  $('.feedback').find('.content').html(feedback);    
   // STORE.view = 'feedback';
   renderView('feedback');
 }
 
 function renderStatus() {
   console.log('renderStatus() ran...');
+  let updatedStatus = generateStatus();
+  $('.status').html(updatedStatus);
+}
+
+function renderStatusHighlight(param) {
+  if (param === true) {
+    $('.status').css('background-color', 'red');
+    $('.status').css('color', 'white');
+  } else {
+    $('.status').css('background-color', 'rgb(12, 12, 12)');
+    $('.status').css('color', '#999');
+  }
 }
 
 function renderQuiz() {
@@ -121,6 +164,7 @@ function renderQuiz() {
   $('.quiz').find('.content').html(card);
   //STORE.view = 'quiz';
   renderView('quiz');
+  renderStatusHighlight(false);
 }
 
 // init
@@ -171,64 +215,104 @@ function handleStartQuiz() {
   $('.intro').on('click', '.start-quiz', function(event) {
     // console.log(event.target);
     renderQuiz();
+    renderStatus();
   });
 }
 
+// ^^^^^^^^^^^^ could probably merge this function with handleStartQuiz() **REITERATE**
+// (via Feedback View)
+// Handle Next Quiz Question View
+function handleNextQuestion() {
+  $('.feedback').on('click', '.next-question', function(event) {
+    // if !Last Question, // Handle *Next* Quiz Question View 
+    // else if Last Question... // Handle Final Results View
+    if (STORE.currentQuestion !== QUESTIONS.length - 1) {
+      STORE.currentQuestion += 1;
+      renderQuiz();
+      renderStatus();
+    } else {
+      // that was the last question, so how Final Results View
+      // renderFinalResults();
+    }
 
-// (via Quiz Question View)
-// check if choice true or false
-function checkAnswer() {
-
+    
+  });
 
 }
+
+
+
 
 
 // (via Quiz Question View)
 // Handle Feedback View
-function handleFeedback() {
-  console.log('handleFeedback() ran...');
-  $('.quiz').on('click', '.submit-answer', function(event) {
+function handleAnswerSubmitted() {
+  console.log('handleAnswerSubmitted() ran...');
+  $('.quiz').on('submit', '#user-controls', function(event) {
+    console.log('handleAnswerSubmitted() listener event ran...');
     event.preventDefault();
-    let selected = $('input:checked');
-    let answer = selected.val();
+    let selectedAnswer = $('input[name=answer]:checked').val();
+    console.log(`input[name=answer]:checked: ${selectedAnswer}`);
+    // push selected answer to STORE
+    STORE.userAnswer.push(selectedAnswer);
+    console.log(`STORE.userAnswer: ${STORE.userAnswer}`);
 
-    if (answer === QUESTIONS[STORE.currentQuestion].answer) {
-      console.log("correct");
+    
+    // Refering to database 'STORE.userAnswer' 
+    // rather than local DOM 'selectedAnswer' (as I would do)
+    if (STORE.userAnswer[STORE.userAnswer.length-1] === QUESTIONS[STORE.currentQuestion].answer) {
+      console.log("CORRECT ANSWER");
+      STORE.score += 1;
       renderFeedback(true);
+      // renderStatus();
     } else {
-      console.log("wrong");
+      console.log("WRONG ANSWER");
       renderFeedback(false);
+      // renderStatus;
     }
-    // checkAnswer();
-    // renderFeedback();
+    //renderQuiz();
+    renderStatus();
   });
 }
 
+//
+
+
 // TEMPORARY HANDLER
-// just so I can quickly cycle through questions, bypassing Feedback loop
+// just so I can quickly cycle through questions
+// bypassing Feedback loop
+/*
 function handleQuizCycleTEMP() {
-  console.log('handleQuizCycleTemp() ran...');
-  $('.quiz').on('click', '.submit-answer', function(event) {
+  // console.log('handleQuizCycleTemp() ran...');
+  $('.quiz').on('submit', '#user-controls', function(event) {
     console.log('handleQuizCycleTemp() listener event ran...');
     event.preventDefault();
-    let selected = $('input:checked');
-    let answer = selected.val();
-    console.log(`input:checked: ${selected}`);
-    console.log(`answer: ${answer}`);
+    let selectedAnswer = $('input[name=answer]:checked').val();
+    console.log(`input[name=answer]:checked: ${selectedAnswer}`);
+    // push selected answer to STORE
+    STORE.userAnswer.push(selectedAnswer);
+    console.log(`STORE.userAnswer: ${STORE.userAnswer}`);
 
-    if (answer === QUESTIONS[STORE.currentQuestion].answer) {
-      console.log("correct");
+    
+    // Refering to database 'STORE.userAnswer' 
+    // rather than local DOM 'selectedAnswer' (as I would do)
+    if (STORE.userAnswer[STORE.userAnswer.length-1] === QUESTIONS[STORE.currentQuestion].answer) {
+      console.log("CORRECT ANSWER");
+      STORE.score += 1;
       renderFeedback(true);
+      renderStatus();
     } else {
-      console.log("wrong");
+      console.log("WRONG ANSWER");
       renderFeedback(false);
+      renderStatus;
     }
   
     // question counter
     if (STORE.currentQuestion < QUESTIONS.length - 1) {
       STORE.currentQuestion += 1;
-    } else {
+    } else { // reset
       STORE.currentQuestion = 0;
+      STORE.score = 0;
     }
 
     renderQuiz();
@@ -237,11 +321,10 @@ function handleQuizCycleTEMP() {
   });
 
 }
+*/
 
 
-// (via Feedback View)
-// if !Last Question, // Handle *Next* Quiz Question View 
-// else if Last Question... // Handle Final Results View
+
 
 
 

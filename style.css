@@ -23,7 +23,7 @@ body {
 
 section {  /* should change to <section> but had hide/show issues? */
   padding: 20px;
-  margin-top: 60px;
+  margin-top: 20px;
   max-width: 545px;
   margin-right: auto;
   margin-left: auto;

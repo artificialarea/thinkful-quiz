@@ -115,7 +115,7 @@ const STORE = {
   // Current question
   currentQuestion: 0,
   // User's answer choice(s)
-  userAnswer: 0,
+  userAnswer: [],
   // Score? Anything else?
   score: 0,
 };

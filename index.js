@@ -7,17 +7,58 @@
 // $(document).ready
 $(function() {
   renderView();               // renderView(thisView = 'start')
+  initShuffleChoices();       // randomize order of multiple choices in questions
+
   handleStartQuiz();        
   handleAnswerSubmitted();    // disable if using this fn VVVVVV
   // handleQuizCycleTEMP();   // to bypass Feedback View
   handleNextQuestion();
   handleReStartQuiz();
+  
 });
 
 // SEPERATION OF CONCERNS: TYPES OF FUNCTIONS
+// (Miscellaneous)
 // Template Generators
 // Rendering Functions
 // Event Handlers
+
+
+
+//////////////////////////////////////////////////////////////
+// MISCELLANEOUS /////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
+function initShuffleChoices() {
+  // when quiz first runs randomise/shuffle multiple choice order in QUESTIONS dB.
+  // .sort() randomised with the Fisher–Yates Shuffle
+  // Copy.n.paste via https://bost.ocks.org/mike/shuffle/
+
+  QUESTIONS.forEach(function(element) {
+    const array = element.choices;
+    // console.log(`array (before): ${array}`);
+    function shuffle(array) {
+      var m = array.length, t, i;
+    
+      // While there remain elements to shuffle…
+      while (m) {
+    
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+    
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+    
+      return array;
+    }
+    shuffle(array);
+    // console.log(`array (after): ${array}`);
+  });
+}
+
 
 
 //////////////////////////////////////////////////////////////
@@ -104,6 +145,10 @@ function generateStatus() {
 function generateQuizQuestion(arr) {
   const questionNum = STORE.currentQuestion;
   const question = arr[questionNum];
+
+  // ** REFACTOR **
+  // to randomise question order 
+  // (but without picking the same number twice, that's the problem)
 
   return `
     <img src="${question.image}" alt="${question.imgAlt}">

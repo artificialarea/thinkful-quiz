@@ -1,12 +1,14 @@
 # thinkful-quiz
 
+Assignment per: https://courses.thinkful.com/interactive-web-apps-v1/checkpoint/9
 
-03-29 Archived Greybox Wireframe html/css + Work Flow Diagram into 'greybox' directory for posterity
+--
 
-03-28 Wireframe Assignment: 
-https://gist.github.com/artificialarea/172b518671b0835da32d7742ded26e46
+**Output:**
+* this repo :P
+* live site: https://artificialarea.github.io/thinkful-quiz/
 
-
+* [earlier greybox wireframe assignment...](https://gist.github.com/artificialarea/172b518671b0835da32d7742ded26e46)
 
 --
 

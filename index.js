@@ -120,7 +120,7 @@ function generateFeedback(bool) {
     return `
       <img src="${question.image}" alt="${question.imgAlt}">
       <header>
-        <h1>TRUE!</h1>
+        <h1>TRUE! <span>+1 Score!<span></h1>
       </header>
       <p>The correct answer is indeed...</p>
       <h3>${question.answer}</h3>

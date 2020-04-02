@@ -31,14 +31,30 @@ h1 {
   font-size: 1.5em;
 }
 
+.feedback h1 span {
+  color: red;
+  font-weight: 400;
+}
+
 h3 {
-  font-size: 1em;
+  font-size: 1.2em;
   line-height: 1.5;
+  margin-top: 0;
+}
+
+p {
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+.feedback p {
+  color: #999;
 }
 
 fieldset {
   border: 0;
   padding: 0;
+  margin: 0;
 }
 
 legend {
@@ -54,11 +70,13 @@ label {
 
 input {
   margin: 10px 8px 10px 4px;
+  vertical-align: 0.1em;
 }
 
 button {
   padding: 5px 10px;
   margin-top: 40px;
+  margin-bottom: 40px;
   width: 100%;
 }
 
@@ -82,10 +100,6 @@ li {
 
 .score-gauge {
   float: right;
-}
-
-p {
-  line-height: 1.4;
 }
 
 .selected {
@@ -118,11 +132,27 @@ For any screen larger than 400px
     font-size: 2em; /* standard */
   }
 
+  h3 {
+    font-size: 1.4em;
+    line-height: 1.5;
+    margin-top: 0;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
   legend {
     font-size: 1.2em;
     font-weight: bold;
     line-height: 1.5;
     margin-bottom: 20px;
+  }
+
+  button {
+    padding: 5px 10px;
+    margin-top: 40px;
+    width: 100%;
   }
 
 }

@@ -1,5 +1,12 @@
 'use strict';
 
+/*
+NOTE: unable to access local images, e.g. <img src="img/IWDRM_Vertigo.webp"> 
+on the mobile view of https://artificialarea.github.io/thinkful-quiz/ 
+(dunno what happened... it worked earlier), 
+so for now pointing to original images hosted on tumblr until I can troubleshoot.
+*/
+
 // In-memory database of questions
 const QUESTIONS = [
   // 1
@@ -13,8 +20,8 @@ const QUESTIONS = [
       'A support group for the bereaved.',
     ],
     answer: 'A support group for men with testicular cancer.',
-    image: 'img/IWDRM_fightClub.webp',
-    // image: 'https://66.media.tumblr.com/38ad849338d5e1eeecfd1880b0497514/tumblr_mh6d6nDLrR1qe0eclo1_r6_500.gifv',
+    // image: 'img/IWDRM_fightClub.webp',
+    image: 'https://66.media.tumblr.com/38ad849338d5e1eeecfd1880b0497514/tumblr_mh6d6nDLrR1qe0eclo1_r6_500.gifv',
     imageAlt: 'A scene from the film, Fight Club.',
   },
   // 2
@@ -28,8 +35,8 @@ const QUESTIONS = [
       'He’s a teacher.',
     ],
     answer: 'He’s a surveillance expert.',
-    image: 'img/IWDRM_theConversation.gif',
-    // image: 'https://66.media.tumblr.com/tumblr_m0gypc6X3x1qe0eclo1_r4_500.gifv',
+    // image: 'img/IWDRM_theConversation.gif',
+    image: 'https://66.media.tumblr.com/tumblr_m0gypc6X3x1qe0eclo1_r4_500.gifv',
     imageAlt: 'A scene from the film, The Conversation.',
   },
   // 3
@@ -43,8 +50,8 @@ const QUESTIONS = [
       'Pequod',
     ],
     answer: 'Belefonte',
-    image: 'img/IWDRM_theLifeAquatic.webp',
-    // image: 'https://66.media.tumblr.com/tumblr_lsovzeh9bf1qe0eclo1_r5_500.gifv',
+    // image: 'img/IWDRM_theLifeAquatic.webp',
+    image: 'https://66.media.tumblr.com/tumblr_lsovzeh9bf1qe0eclo1_r5_500.gifv',
     imageAlt: 'A scene from the film, The Life Aquatic with Steve Zissou.',
   },
   // 4
@@ -58,8 +65,8 @@ const QUESTIONS = [
       '“This monolith looks friendly.”',
     ],
     answer: '“Oh my god, it’s full of stars…”',
-    image: 'img/IWDRM_2001.webp',
-    // image: 'https://66.media.tumblr.com/tumblr_loa8s68rcy1qe0eclo1_r1_500.gifv',
+    // image: 'img/IWDRM_2001.webp',
+    image: 'https://66.media.tumblr.com/tumblr_loa8s68rcy1qe0eclo1_r1_500.gifv',
     imageAlt: 'A scene from the film, 2001: A Space Odyssey.',
   },
   // 5
@@ -73,8 +80,8 @@ const QUESTIONS = [
       'The Ellsberg Paradox',
     ],
     answer: 'The Ludovico Technique',
-    image: 'img/IWDRM_clockworkOrange.webp',
-    // image: 'https://66.media.tumblr.com/tumblr_li5uszybM11qe0eclo1_r3_500.gifv',
+    // image: 'img/IWDRM_clockworkOrange.webp',
+    image: 'https://66.media.tumblr.com/tumblr_li5uszybM11qe0eclo1_r3_500.gifv',
     imageAlt: 'A scene from the film, Clockwork Orange.',
   },
   // 6
@@ -88,8 +95,8 @@ const QUESTIONS = [
       'He has a drink of milk first, to contemplate.',
     ],
     answer: 'He flips a coin.',
-    image: 'img/IWDRM_NoCountryForOldMen.webp',
-    // image: 'https://66.media.tumblr.com/f407ad0f00dee9ea1eaf24f26fe2a335/tumblr_nrsfo8Ubbw1qe0eclo1_r7_500.gifv',
+    // image: 'img/IWDRM_NoCountryForOldMen.webp',
+    image: 'https://66.media.tumblr.com/f407ad0f00dee9ea1eaf24f26fe2a335/tumblr_nrsfo8Ubbw1qe0eclo1_r7_500.gifv',
     imageAlt: 'A scene from the film, No Country for Old Men.',
   },
   // 7
@@ -103,7 +110,8 @@ const QUESTIONS = [
       'Mr. Blonde',
     ],
     answer: 'Mr. Orange',
-    image: 'img/IWDRM_ReservoirDogs.webp',
+    // image: 'img/IWDRM_ReservoirDogs.webp',
+    image:'https://66.media.tumblr.com/316408fc4283f9e5375fe9b7a7e141ed/tumblr_mwgtxdL3b81qe0eclo1_500.gifv',
     imageAlt: 'A shootout scene from the film, Reservoir Dogs.',
   },
   // 8
@@ -117,7 +125,8 @@ const QUESTIONS = [
       'Singapore, 2049.',
     ],
     answer: 'Los Angleles, 2019.',
-    image: 'img/IWDRM_BladeRunner.webp',
+    // image: 'img/IWDRM_BladeRunner.webp',
+    image: 'https://66.media.tumblr.com/tumblr_llg4odOzdu1qe0eclo1_r15_500.gifv',
     imageAlt: 'An arial scene from the film, Blade Runner',
   },
   // 9
@@ -131,7 +140,8 @@ const QUESTIONS = [
       'Luc Besson',
     ],
     answer: 'Terry Gilliam',
-    image: 'img/IWDRM_Brazil.webp',
+    // image: 'img/IWDRM_Brazil.webp',
+    image: 'https://66.media.tumblr.com/tumblr_let5asucR91qe0eclo1_r5_500.gifv',
     imageAlt: '',
   },
   // 10
@@ -145,7 +155,8 @@ const QUESTIONS = [
       'Bounty Hunter Silas Selleck (Michael Fassbender).',
     ],
     answer: 'Deputy U.S. Marshal Rooster Cogburn (Jeff Bridges).',
-    image: 'img/IWDRM_trueGrit.webp',
+    // image: 'img/IWDRM_trueGrit.webp',
+    image: 'https://66.media.tumblr.com/tumblr_loktfjVNF91qe0eclo1_r6_500.gifv',
     imageAlt: 'A scene from the film, True Grit.',
   },
 

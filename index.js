@@ -92,7 +92,8 @@ function generateResults() {
   }
 
   return `
-    <img src="img/IWDRM_DrStrangelove.webp" alt="A scene from the film, Dr. Strangelove>
+    <!--<img src="img/IWDRM_DrStrangelove.webp" alt="A scene from the film, Dr. Strangelove">-->
+    <img src="https://66.media.tumblr.com/tumblr_lex3s2CgQN1qe0eclo1_r9_500.gifv" alt="A scene from the film, Dr. Strangelove">
     <p class="final-score">So, you got ${finalScore} out of ${possibleAnswers} answers correct...</p>
     <header>
       <h2 class="msg">${contextualMsg}</h2>

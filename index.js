@@ -6,7 +6,7 @@
 
 // $(document).ready
 $(function() {
-  renderView();               // renderView(thisView = 'start')
+  renderView();  // renderView(thisView = 'start')
   initShuffleChoices();       // randomize order of multiple choices within questions
 
   handleStartQuiz();  
@@ -17,15 +17,15 @@ $(function() {
   
   // EXTRAS // ** REFACTOR? ** within MoSoCoW a 'Could'
   // handleRadioButtonHighlight();
-  
 });
 
+//////////////////////////////////////////////////////////////
 // SEPERATION OF CONCERNS: TYPES OF FUNCTIONS
 // (Miscellaneous)
 // Template Generators
 // Rendering Functions
 // Event Handlers
-
+//////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////
@@ -82,24 +82,25 @@ function generateResults() {
     contextualMsg = 'Meh. You need to start binge watching more movies, eh?';
   } else if (finalScore >= 4 && finalScore <= 6) {
     // 4 - 6: decent
-    contextualMsg = 'Not bad. You need to start binge watching more movies, eh?';
+    contextualMsg = 'Pretty Good! You\'ve certain seen your fair share of movies, haven\'t you?';
   } else if (finalScore >= 7 && finalScore <= 9) {
     // 7 - 9: impressive
     contextualMsg = 'Impressive! You certainly are a film buff, aren\'t you!';
   } else if (finalScore === 10) {
     // 10: bonafide auteur
-    contextualMsg = 'Impressive! You certainly are a film buff, aren\'t you! We will need to come up with another quiz with much more obscure films, eh?';
+    contextualMsg = 'Faultless! You certainly are a film buff, aren\'t you!';
   }
 
   return `
     <!--<img src="img/IWDRM_DrStrangelove.webp" alt="A scene from the film, Dr. Strangelove">-->
     <img src="https://66.media.tumblr.com/tumblr_lex3s2CgQN1qe0eclo1_r9_500.gifv" alt="A scene from the film, Dr. Strangelove">
-    <p class="final-score">So, you got ${finalScore} out of ${possibleAnswers} answers correct...</p>
+    <p class="final-score">You got ${finalScore} out of ${possibleAnswers} answers correct...</p>
     <header>
       <h2 class="msg">${contextualMsg}</h2>
     </header>
-    <p class="iwdrm">By the way, all the animated film stills are a labour of love sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME.</a></p> 
     <button class="start-quiz">Try Quiz Again?</button>
+    <p class="iwdrm">By the way, all the animated film stills are sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME.</a></p> 
+    
   `;
 }
 
@@ -217,7 +218,6 @@ function renderQuiz() {
   renderStatusHighlight(false);
 }
 
-
 function renderView(thisView = 'start') {
   // Render function "draws" the app.
   // Explicitly set components to visible or hidden 
@@ -259,7 +259,7 @@ function renderView(thisView = 'start') {
 //////////////////////////////////////////////////////////////
 
 // (via Final Results View)
-// ** REFACTOR ** by attaching the event handler to '.main', so event delegation to '.start-quiz' button works for both section views. ***********
+// ** REFACTOR? ** by attaching the event handler to '.main', so event delegation to '.start-quiz' button works for both section views.
 function handleReStartQuiz() {
   $('.final-results'). on('click', '.start-quiz', function(event) {
     // reset STORE
@@ -285,8 +285,9 @@ function handleStartQuiz() {
 }
 
 
-// ^^^^^^^^^^^^ could probably merge this function with handleStartQuiz() **REITERATE**
+
 // (via Feedback View)
+// ** REFACTOR? ** could probably merge this function with handleStartQuiz() ^^^^^^^^
 function handleNextQuestion() {
   $('.feedback').on('click', '.next-question', function(event) {
     // if !Last Question, // Handle *Next* Quiz Question View 
@@ -302,18 +303,10 @@ function handleNextQuestion() {
 
 // (via Quiz Question View)
 function handleAnswerSubmitted() {
-  // console.log('handleAnswerSubmitted() ran...');
   $('.quiz').on('submit', '#user-controls', function(event) {
-    // console.log('handleAnswerSubmitted() listener event ran...');
     event.preventDefault();
     let selectedAnswer = $('input[name=answer]:checked').val();
-    // console.log(`input[name=answer]:checked: ${selectedAnswer}`);
-    // push selected answer to STORE
     STORE.userAnswer.push(selectedAnswer);
-    // console.log(`STORE.userAnswer: ${STORE.userAnswer}`);
-    
-    // Refering to database 'STORE.userAnswer' 
-    // rather than local DOM 'selectedAnswer' (as I would do)
     if (STORE.userAnswer[STORE.userAnswer.length-1] === QUESTIONS[STORE.currentQuestion].answer) {
       STORE.score += 1;
       renderFeedback(true);

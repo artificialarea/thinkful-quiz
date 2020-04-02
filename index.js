@@ -89,6 +89,7 @@ function generateResults() {
   }
 
   return `
+    <img src="img/IWDRM_DrStrangelove.webp" alt="A scene from the film, Dr. Strangelove>
     <p class="final-score">So, you got ${finalScore} out of ${possibleAnswers} answers correct...</p>
     <h2 class="msg">${contextualMsg}</h2>
     <p class="iwdrm">By the way, all the animated film stills are a labour of love sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME.</a></p> 
@@ -258,6 +259,7 @@ function handleReStartQuiz() {
     STORE.score = 0;
     STORE.currentQuestion = 0;
     STORE.userAnswer = [];
+    initShuffleChoices();
     renderQuiz();
     renderStatus();
   });
@@ -301,7 +303,7 @@ function handleAnswerSubmitted() {
     // console.log(`input[name=answer]:checked: ${selectedAnswer}`);
     // push selected answer to STORE
     STORE.userAnswer.push(selectedAnswer);
-    console.log(`STORE.userAnswer: ${STORE.userAnswer}`);
+    // console.log(`STORE.userAnswer: ${STORE.userAnswer}`);
     
     // Refering to database 'STORE.userAnswer' 
     // rather than local DOM 'selectedAnswer' (as I would do)

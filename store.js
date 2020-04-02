@@ -92,10 +92,66 @@ const QUESTIONS = [
     // image: 'https://66.media.tumblr.com/f407ad0f00dee9ea1eaf24f26fe2a335/tumblr_nrsfo8Ubbw1qe0eclo1_r7_500.gifv',
     imageAlt: 'A scene from the film, No Country for Old Men.',
   },
+  // 7
+  {
+    title: 'Reservoir Dogs',
+    question: 'During a heist gone wrong, who was shot in the stomach by an armed woman during the escape and is bleeding severely at the warehouse?',
+    choices: [
+      'Mr. Orange',
+      'Mr. White',
+      'Mr. Pink',
+      'Mr. Blonde',
+    ],
+    answer: 'Mr. Orange',
+    image: 'img/IWDRM_ReservoirDogs.webp',
+    imageAlt: 'A shootout scene from the film, Reservoir Dogs.',
+  },
+  // 8
+  {
+    title: 'Blade Runner',
+    question: 'What city and year is the film based?',
+    choices: [
+      'Los Angleles, 2019.',
+      'New York City, 2020.',
+      'New York City, 2032.',
+      'Singapore, 2049.',
+    ],
+    answer: 'Los Angleles, 2019.',
+    image: 'img/IWDRM_BladeRunner.webp',
+    imageAlt: 'An arial scene from the film, Blade Runner',
+  },
+  // 9
+  {
+    title: 'Brazil',
+    question: 'Whis 1985 dystopian science fiction film was directed by whom?',
+    choices: [
+      'Terry Gilliam',
+      'Tony Scott',
+      'Andrei Tarkovsky',
+      'Luc Besson',
+    ],
+    answer: 'Terry Gilliam',
+    image: 'img/IWDRM_Brazil.webp',
+    imageAlt: '',
+  },
+  // 10
+  {
+    title: 'True Grit',
+    question: 'The 14-year old Mattie Ross hires someone to track down Tom Chaney (Josh Brolin), who murdered her father. Who does she hire?',
+    choices: [
+      'Deputy U.S. Marshal Rooster Cogburn (Jeff Bridges).',
+      'Texas Ranger LaBoeuf (Matt Damon).',
+      '“Lucky” Ned Pepper (Barry Pepper).',
+      'Bounty Hunter Silas Selleck (Michael Fassbender).',
+    ],
+    answer: 'Deputy U.S. Marshal Rooster Cogburn (Jeff Bridges).',
+    image: 'img/IWDRM_trueGrit.webp',
+    imageAlt: 'A scene from the film, True Grit.',
+  },
 
   /* template
   {
-    title: ''
+    title: '',
     question: '',
     choices: [
       '',
@@ -104,7 +160,7 @@ const QUESTIONS = [
       '',
     ],
     answer: '',
-    image: '',
+    image: 'img/',
     imageAlt: '',
   }, */
 ];

@@ -8,7 +8,7 @@ Assignment per: https://courses.thinkful.com/interactive-web-apps-v1/checkpoint/
 * this repo :P
 * live site: https://artificialarea.github.io/thinkful-quiz/
 
-* earlier wireframe assignment: https://gist.github.com/artificialarea/172b518671b0835da32d7742ded26e46
+* [earlier greybox wireframe assignment...](https://gist.github.com/artificialarea/172b518671b0835da32d7742ded26e46)
 
 --
 

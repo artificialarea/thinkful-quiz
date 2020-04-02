@@ -81,3 +81,11 @@ li {
 .score-gauge {
   float: right;
 }
+
+p {
+  line-height: 1.4;
+}
+
+.selected {
+  font-weight: bold;
+}

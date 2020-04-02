@@ -7,13 +7,16 @@
 // $(document).ready
 $(function() {
   renderView();               // renderView(thisView = 'start')
-  initShuffleChoices();       // randomize order of multiple choices in questions
+  initShuffleChoices();       // randomize order of multiple choices within questions
 
-  handleStartQuiz();        
-  handleAnswerSubmitted();    // disable if using this fn VVVVVV
+  handleStartQuiz();  
+  handleAnswerSubmitted();    // disable if using next fn VVVVVV
   // handleQuizCycleTEMP();   // to bypass Feedback View
   handleNextQuestion();
   handleReStartQuiz();
+  
+  // EXTRAS // ** REFACTOR? ** within MoSoCoW a 'Could'
+  // handleRadioButtonHighlight();
   
 });
 
@@ -153,10 +156,6 @@ function generateQuizQuestion(arr) {
   const questionNum = STORE.currentQuestion;
   const question = arr[questionNum];
 
-  // ** REFACTOR **
-  // to randomise question order 
-  // (but without picking the same number twice, that's the problem)
-
   return `
     <img src="${question.image}" alt="${question.imgAlt}">
     <header>
@@ -259,7 +258,7 @@ function renderView(thisView = 'start') {
 //////////////////////////////////////////////////////////////
 
 // (via Final Results View)
-// ** REFACTOR ** by attaching the event handler to '.main', thus event delegation to '.start-quiz' button works for both section views. ***********
+// ** REFACTOR ** by attaching the event handler to '.main', so event delegation to '.start-quiz' button works for both section views. ***********
 function handleReStartQuiz() {
   $('.final-results'). on('click', '.start-quiz', function(event) {
     // reset STORE
@@ -324,10 +323,19 @@ function handleAnswerSubmitted() {
   });
 }
 
-//
+
+/* 
+// ** REFACTOR? ** within MoSoCoW a 'Could'.
+// make associated text of selected radio button highlight in some way.
+function handleRadioButtonHighlight() {
+ $('.quiz').on('click', 'input[name=answer]:checked', function(event) {
+  // console.log(event.currentTarget + 'selected');
+ });
+}
+*/
 
 
-// TEMPORARY HANDLER
+// TEMPORARY HANDLER ///////////////////////////////////////////////////
 // so I can quickly cycle through questions
 // bypassing Feedback loop
 

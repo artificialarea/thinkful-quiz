@@ -12,18 +12,11 @@ html {
 body {
   font-family: 'Roboto', sans-serif;
   color: #2b2b2b;
-  margin: 20px;
-  background-color: rgb(167, 164, 164);
+  background-color: #F9F9F9;
 }
 
-.hidden {
-  /* on initial load of HTML already set the class of most of the app views to 'hidden' */
-  display: none;
-}
-
-section {  /* should change to <section> but had hide/show issues? */
-  padding: 20px;
-  margin-top: 20px;
+section {  
+  padding: 10px;
   max-width: 545px;
   margin-right: auto;
   margin-left: auto;
@@ -34,7 +27,12 @@ img {
   width: 100%;
 }
 
+h1 {
+  font-size: 1.5em;
+}
+
 h3 {
+  font-size: 1em;
   line-height: 1.5;
 }
 
@@ -44,10 +42,14 @@ fieldset {
 }
 
 legend {
-  font-size: 18px;
+  font-size: 1em;
   font-weight: bold;
   line-height: 1.5;
   margin-bottom: 20px;
+}
+
+label {
+  font-size: 1em;
 }
 
 input {
@@ -66,7 +68,7 @@ button:hover {
 
 .status {
   padding: 8px 16px;
-  margin: 0 0 16px 0;
+  margin: 0 0 2px 0;
   background-color: rgb(12, 12, 12);
   color: #999;
   font-weight: 800;
@@ -88,4 +90,39 @@ p {
 
 .selected {
   font-weight: bold;
+}
+
+/*
+For any screen larger than 400px
+*/
+@media screen and (min-width: 400px) {
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    color: #2b2b2b;
+    margin: 20px;
+    background-color: #999;
+  }
+
+  section {  
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 545px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #F9F9F9;
+    filter: drop-shadow(4px 4px 4px);
+  }
+
+  h1 {
+    font-size: 2em; /* standard */
+  }
+
+  legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
 }

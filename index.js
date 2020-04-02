@@ -91,7 +91,9 @@ function generateResults() {
   return `
     <img src="img/IWDRM_DrStrangelove.webp" alt="A scene from the film, Dr. Strangelove>
     <p class="final-score">So, you got ${finalScore} out of ${possibleAnswers} answers correct...</p>
-    <h2 class="msg">${contextualMsg}</h2>
+    <header>
+      <h2 class="msg">${contextualMsg}</h2>
+    </header>
     <p class="iwdrm">By the way, all the animated film stills are a labour of love sourced from <a href='https://iwdrm.tumblr.com/' target="_blank">IF WE DON'T, REMEMBER ME.</a></p> 
     <button class="start-quiz">Try Quiz Again?</button>
   `;
@@ -113,8 +115,10 @@ function generateFeedback(bool) {
 
     return `
       <img src="${question.image}" alt="${question.imgAlt}">
-      <h1>TRUE!</h1>
-      <p>The correct answer is...</p>
+      <header>
+        <h1>TRUE!</h1>
+      </header>
+      <p>The correct answer is indeed...</p>
       <h3>${question.answer}</h3>
       <button class="next-question">${buttonLabel}</button>
     `;
@@ -122,7 +126,9 @@ function generateFeedback(bool) {
   else {
     return `
       <img src="${question.image}" alt="${question.imgAlt}">
-      <h1>WRONG!</h1>
+      <header>
+        <h1>WRONG!</h1>
+      </header>
       <p>The correct answer is...</p>
       <h3>${question.answer}</h3>
       <button class="next-question">${buttonLabel}</button>
@@ -153,7 +159,9 @@ function generateQuizQuestion(arr) {
 
   return `
     <img src="${question.image}" alt="${question.imgAlt}">
-    <h1 class="">${question.title}</h1>
+    <header>
+      <h1>${question.title}</h1>
+    </header>
     <form id="user-controls">
       <fieldset>
         <legend class="question-text">${question.question}</legend>
@@ -202,12 +210,11 @@ function renderStatusHighlight(param) {
 
 function renderQuiz() {
   const card = generateQuizQuestion(QUESTIONS);
-  // generateStatus(STORE);
-  
   $('.quiz').find('.content').html(card);
 
   renderView('quiz');
-  // renderStatusHighlight(false);
+  // also, reset/remove highlight state from statusbar for next question
+  renderStatusHighlight(false);
 }
 
 

@@ -156,12 +156,12 @@ function renderStatusHighlight(param) {
 
 function renderQuiz() {
   const card = generateQuizQuestion(QUESTIONS);
-  generateStatus(STORE);
+  // generateStatus(STORE);
   
   $('.quiz').find('.content').html(card);
 
   renderView('quiz');
-  renderStatusHighlight(false);
+  // renderStatusHighlight(false);
 }
 
 
@@ -206,7 +206,7 @@ function renderView(thisView = 'start') {
 //////////////////////////////////////////////////////////////
 
 // (via Final Results View)
-// ** REFACTOR ** into handleStartQuiz()
+// ** REFACTOR ** by attaching the event handler to '.main', thus event delegation to '.start-quiz' button works for both section views. ***********
 function handleReStartQuiz() {
   $('.final-results'). on('click', '.start-quiz', function(event) {
     // reset STORE
@@ -229,6 +229,7 @@ function handleStartQuiz() {
     renderStatus();
   });
 }
+
 
 // ^^^^^^^^^^^^ could probably merge this function with handleStartQuiz() **REITERATE**
 // (via Feedback View)

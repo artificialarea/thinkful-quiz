@@ -92,8 +92,7 @@ function generateResults() {
   }
 
   return `
-    <!--<img src="img/IWDRM_DrStrangelove.webp" alt="A scene from the film, Dr. Strangelove">-->
-    <img src="https://66.media.tumblr.com/tumblr_lex3s2CgQN1qe0eclo1_r9_500.gifv" alt="A scene from the film, Dr. Strangelove">
+    <img src="img/IWDRM_DrStrangelove.gif" alt="A scene from the film, Dr. Strangelove">
     <p class="final-score">You got ${finalScore} out of ${possibleAnswers} answers correct...</p>
     <header>
       <h2 class="msg">${contextualMsg}</h2>
@@ -157,7 +156,8 @@ function generateStatus() {
 function generateQuizQuestion(arr) {
   const questionNum = STORE.currentQuestion;
   const question = arr[questionNum];
-
+  console.log(`img src: ${question.image}`);
+  
   return `
     <img src="${question.image}" alt="${question.imageAlt}">
     <header>

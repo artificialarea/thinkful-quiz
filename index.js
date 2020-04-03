@@ -159,7 +159,7 @@ function generateQuizQuestion(arr) {
   const question = arr[questionNum];
 
   return `
-    <img src="${question.image}" alt="${question.imgAlt}">
+    <img src="${question.image}" alt="${question.imageAlt}">
     <header>
       <h1>${question.title}</h1>
     </header>

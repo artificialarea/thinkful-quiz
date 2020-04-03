@@ -119,15 +119,15 @@ const QUESTIONS = [
     title: 'Blade Runner',
     question: 'What city and year is the film based?',
     choices: [
-      'Los Angleles, 2019.',
+      'Los Angeles, 2019.',
       'New York City, 2020.',
       'New York City, 2032.',
       'Singapore, 2049.',
     ],
-    answer: 'Los Angleles, 2019.',
+    answer: 'Los Angeles, 2019.',
     // image: 'img/IWDRM_BladeRunner.webp',
     image: 'https://66.media.tumblr.com/tumblr_llg4odOzdu1qe0eclo1_r15_500.gifv',
-    imageAlt: 'An arial scene from the film, Blade Runner',
+    imageAlt: 'An arial scene from the film, Blade Runner.',
   },
   // 9
   {
@@ -142,7 +142,7 @@ const QUESTIONS = [
     answer: 'Terry Gilliam',
     // image: 'img/IWDRM_Brazil.webp',
     image: 'https://66.media.tumblr.com/tumblr_let5asucR91qe0eclo1_r5_500.gifv',
-    imageAlt: '',
+    imageAlt: 'A scene from the film, Brazil.',
   },
   // 10
   {
